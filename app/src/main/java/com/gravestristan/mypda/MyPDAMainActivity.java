@@ -1,13 +1,11 @@
 package com.gravestristan.mypda;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
-public class MyPDAMainActivity extends AppCompatActivity {
+public class MyPDAMainActivity extends SingleFragmentActivity implements AppStatics{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_pdamain);
+    protected Fragment createFragment(){
+        return new MainMenuFragment();
     }
 }
