@@ -14,23 +14,26 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20sp"
-            android:text="New Text"
+            android:text="short text"
             android:id="@+id/textView1"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20sp"
-            android:text="New Text"
+            android:text="--------------------max character amount--------------------"
             android:id="@+id/textView2"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20sp"
-            android:text="New Text"
+            android:text="Schedule Name ----- Date"
             android:id="@+id/textView3"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
 
     </LinearLayout>
 
