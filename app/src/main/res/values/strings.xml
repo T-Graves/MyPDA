@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyPDA</string>
+
+    <string name="action_help">Help</string>
 </resources>
