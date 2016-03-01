@@ -8,58 +8,70 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
             android:text="New Text"
             android:id="@+id/textView1"
             android:layout_gravity="center_horizontal" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
             android:text="New Text"
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
             android:text="New Text"
             android:id="@+id/textView3"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/schedule_button"
-        android:id="@+id/schedule"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/notes_button"
-        android:id="@+id/notes"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/schedule_button"
+            android:id="@+id/schedule"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/workouts_button"
-        android:id="@+id/workouts"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notes_button"
+            android:id="@+id/notes"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/general_button"
-        android:id="@+id/general"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/workouts_button"
+            android:id="@+id/workouts"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/general_button"
+            android:id="@+id/general"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp" />
+
+    </LinearLayout>
 
 </LinearLayout>
