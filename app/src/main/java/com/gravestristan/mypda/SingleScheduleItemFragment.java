@@ -13,12 +13,23 @@ import android.view.ViewGroup;
  */
 public class SingleScheduleItemFragment extends Fragment implements AppStatics {
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_single_schedule_item, container, false);
@@ -26,11 +37,20 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
         return view;
     }
 
+    /**
+     *
+     * @param menu
+     */
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

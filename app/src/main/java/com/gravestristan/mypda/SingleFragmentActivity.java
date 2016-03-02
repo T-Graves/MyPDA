@@ -16,6 +16,10 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

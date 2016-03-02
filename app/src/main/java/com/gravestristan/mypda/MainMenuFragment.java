@@ -21,11 +21,22 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     Button mWorkoutsButton;
     Button mGeneralButton;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
@@ -89,36 +100,54 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         transaction.commit();
     }
 
+    /**
+     *
+     */
     @Override
     public void onDestroy() {
         Log.d(TAG, "main menu fragment destroyed");
         super.onDestroy();
     }
 
+    /**
+     *
+     */
     @Override
     public void onDetach() {
         Log.d(TAG, "main menu fragment detached");
         super.onDetach();
     }
 
+    /**
+     *
+     */
     @Override
     public void onPause() {
         Log.d(TAG, "main menu fragment paused");
         super.onPause();
     }
 
+    /**
+     *
+     */
     @Override
     public void onResume() {
         Log.d(TAG, "main menu fragment resumed");
         super.onResume();
     }
 
+    /**
+     *
+     */
     @Override
     public void onStart() {
         Log.d(TAG, "main menu fragment started");
         super.onStart();
     }
 
+    /**
+     *
+     */
     @Override
     public void onStop() {
         Log.d(TAG, "main menu fragment stopped");

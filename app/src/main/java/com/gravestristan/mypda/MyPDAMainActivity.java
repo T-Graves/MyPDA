@@ -18,6 +18,11 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
         return new MainMenuFragment();
     }
 
+    /**
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -25,6 +30,11 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
         return true;
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);

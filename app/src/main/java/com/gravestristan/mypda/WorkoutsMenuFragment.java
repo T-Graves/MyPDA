@@ -14,12 +14,23 @@ import android.view.ViewGroup;
  */
 public class WorkoutsMenuFragment extends Fragment implements AppStatics {
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_workouts_menu, container, false);
@@ -27,11 +38,21 @@ public class WorkoutsMenuFragment extends Fragment implements AppStatics {
         return view;
     }
 
+    /**
+     *
+     * @param menu
+     * @param inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

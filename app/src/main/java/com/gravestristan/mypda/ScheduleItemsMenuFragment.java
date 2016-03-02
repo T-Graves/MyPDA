@@ -26,6 +26,10 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
     ListView mScheduleList;
     ScheduleAdapter adapter;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,13 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         mScheduleItems = PDASingleton.get(getActivity()).getScheduleNames();
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_items_menu, container, false);
@@ -62,11 +73,20 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         return view;
     }
 
+    /**
+     *
+     * @param menu
+     */
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_new_task).setVisible(true);
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -82,6 +102,10 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         }
     }
 
+    /**
+     *
+     * @param newFragment
+     */
     private void swapFragmentHandler(Fragment newFragment){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainer, newFragment);
@@ -101,6 +125,13 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
             super(getActivity(), 0, scheduleItems);
         }
 
+        /**
+         *
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
             if(convertView == null) {

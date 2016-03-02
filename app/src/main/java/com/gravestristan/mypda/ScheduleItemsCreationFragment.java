@@ -27,6 +27,10 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
     Button mCreateButton;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,13 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         mScheduleItems = PDASingleton.get(getActivity()).getScheduleNames();
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_item_creation, container, false);
@@ -63,11 +74,21 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         return view;
     }
 
+    /**
+     *
+     * @param menu
+     * @param inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

@@ -5,8 +5,6 @@ import java.util.UUID;
 
 /**
  * Created by Tristan on 2/20/2016.
- *
- * TODO create getters and setters for the mTaskDate variable if it will work for this app
  */
 public class ScheduleItems {
 
