@@ -8,7 +8,7 @@ import java.util.UUID;
  *
  * TODO create getters and setters for the mTaskDate variable if it will work for this app
  */
-public class ScheduleItem {
+public class ScheduleItems {
 
     private UUID mId;
     private String mTaskName;
@@ -17,7 +17,7 @@ public class ScheduleItem {
     /**
      * The constructor for each item. It randomly generates a UUID for each item.
      */
-    public ScheduleItem(){
+    public ScheduleItems(){
         mId = UUID.randomUUID();
     }
 

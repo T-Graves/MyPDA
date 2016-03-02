@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20sp"
-            android:text="Schedule Name ----- Date"
+            android:text="Schedule Item Name ----- Date"
             android:id="@+id/textView3"
             android:layout_gravity="center_horizontal"
             android:gravity="center" />

@@ -2,12 +2,17 @@ package com.gravestristan.mypda;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 /**
  * Created by Tristan on 2/20/2016.
  */
 public class PDASingleton {
 
     private static PDASingleton sPDASingleton;
+
+    private ArrayList<ScheduleItems> mScheduleItems;
 
     private Context mAppContext;
 
@@ -19,6 +24,12 @@ public class PDASingleton {
         mAppContext = appContext;
 
         // Populate with dummy data here
+        mScheduleItems = new ArrayList<ScheduleItems>();
+        for (int i = 0; i < 5; i++) {
+            ScheduleItems scheduleItem = new ScheduleItems();
+            scheduleItem.setTaskName("sample name #" + i);
+            mScheduleItems.add(scheduleItem);
+        }
 
     }
 
@@ -34,4 +45,25 @@ public class PDASingleton {
         return sPDASingleton;
     }
 
+    /**
+     *
+     * @return
+     */
+    public ArrayList<ScheduleItems> getScheduleNames(){
+        return mScheduleItems;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public ScheduleItems getScheduleItem(UUID id) {
+        for (ScheduleItems scheduleItem : mScheduleItems) {
+            if(scheduleItem.getId().equals(id)){
+                return scheduleItem;
+            }
+        }
+        return null;
+    }
 }
