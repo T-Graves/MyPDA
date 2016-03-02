@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,11 +45,6 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         return view;
     }
 
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }*/
-
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_new_task).setVisible(true);
@@ -64,7 +58,6 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                 return true;
             case R.id.action_new_task:
                 ScheduleItemsCreationFragment createNewItem = new ScheduleItemsCreationFragment();
-
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragmentContainer, createNewItem);
                 transaction.addToBackStack(null);
@@ -102,7 +95,7 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                 mTaskName.setText(schItems.getTaskName());
             }
             if(mTaskDate != null){
-                mTaskDate.setText("temp data");
+                mTaskDate.setText(schItems.getTaskDate());
             }
 
             return convertView;

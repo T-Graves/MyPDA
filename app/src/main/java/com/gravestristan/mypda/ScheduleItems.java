@@ -12,7 +12,7 @@ public class ScheduleItems {
 
     private UUID mId;
     private String mTaskName;
-    private Date mTaskDate;
+    private String mTaskDate;
     private String mTaskNote;
 
     /**
@@ -55,12 +55,21 @@ public class ScheduleItems {
         this.mTaskName = mTaskName;
     }
 
-    /*
-
-    // Im not sure if the Date variable type will work for this
-    mTaskDate getter and setter
-
+    /**
+     *
+     * @return
      */
+    public String getTaskDate(){
+        return mTaskDate;
+    }
+
+    /**
+     *
+     * @param mTaskDate
+     */
+    public void setTaskDate(String mTaskDate){
+        this.mTaskDate = mTaskDate;
+    }
 
     /**
      * Method to return the note for this task.
@@ -75,7 +84,7 @@ public class ScheduleItems {
      * @param mTaskNote The users note for the task item
      */
     public void setTaskNote(String mTaskNote){
-        this.mTaskName = mTaskNote;
+        this.mTaskNote = mTaskNote;
     }
 
     /**
