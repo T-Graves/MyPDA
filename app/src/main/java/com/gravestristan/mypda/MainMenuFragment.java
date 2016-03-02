@@ -37,10 +37,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
                 Log.d(TAG, "Schedule button clicked");
                 ScheduleItemsMenuFragment scheduleItems = new ScheduleItemsMenuFragment();
 
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragmentContainer, scheduleItems);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                swapFragmentHandler(scheduleItems);
             }
         });
 
@@ -49,6 +46,9 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             @Override
             public void onClick(View v){
                 Log.d(TAG, "Notes button clicked");
+                NotesMenuFragment notesMenu = new NotesMenuFragment();
+
+                swapFragmentHandler(notesMenu);
             }
         });
 
@@ -57,6 +57,9 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             @Override
             public void onClick(View v){
                 Log.d(TAG, "Workouts button clicked");
+                WorkoutsMenuFragment workoutsMenu = new WorkoutsMenuFragment();
+
+                swapFragmentHandler(workoutsMenu);
             }
         });
 
@@ -65,10 +68,25 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "General button clicked");
+                GeneralsMenuFragment generalsMenu = new GeneralsMenuFragment();
+
+                swapFragmentHandler(generalsMenu);
             }
         });
 
         return view;
+    }
+
+    /**
+     * This method is used to reduce redundant code. It takes in a new fragment and swaps it out
+     * with the current fragment. it puts the current fragment on the backstack to be returned later.
+     * @param newFragment The fragment to change to.
+     */
+    private void swapFragmentHandler(Fragment newFragment){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
