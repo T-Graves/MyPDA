@@ -24,7 +24,9 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_schedule_item_creation, container, false);
+
+        return view;
     }
 
     @Override
@@ -34,6 +36,12 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case android.R.id.home:
+                getFragmentManager().popBackStack();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/schedule_button"
-            android:id="@+id/schedule"
+            android:id="@+id/schedule_button"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/notes_button"
-            android:id="@+id/notes"
+            android:id="@+id/notes_button"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/workouts_button"
-            android:id="@+id/workouts"
+            android:id="@+id/workouts_button"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/general_button"
-            android:id="@+id/general"
+            android:id="@+id/general_button"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 

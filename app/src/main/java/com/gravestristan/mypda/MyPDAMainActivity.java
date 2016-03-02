@@ -20,8 +20,8 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //return super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_new_task).setVisible(false);
         return true;
     }
 

@@ -2,6 +2,7 @@
     <string name="app_name">MyPDA</string>
 
     <string name="action_about">About MyPDA</string>
+    <string name="action_new_task">Create New Task</string>
 
     <string name="schedule_button">Schedule</string>
     <string name="notes_button">Notes</string>

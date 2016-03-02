@@ -2,6 +2,7 @@ package com.gravestristan.mypda;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,9 +46,14 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         return view;
     }
 
-    @Override
+    /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+    }*/
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_new_task).setVisible(true);
     }
 
     @Override
@@ -55,6 +61,14 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         switch (item.getItemId()){
             case android.R.id.home:
                 getFragmentManager().popBackStack();
+                return true;
+            case R.id.action_new_task:
+                ScheduleItemsCreationFragment createNewItem = new ScheduleItemsCreationFragment();
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainer, createNewItem);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -81,8 +95,8 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
             }
             ScheduleItems schItems = getItem(position);
 
-            TextView mTaskName = (TextView) convertView.findViewById(R.id.taskName);
-            TextView mTaskDate = (TextView) convertView.findViewById(R.id.taskDate);
+            TextView mTaskName = (TextView) convertView.findViewById(R.id.task_name);
+            TextView mTaskDate = (TextView) convertView.findViewById(R.id.task_date);
 
             if(mTaskName != null){
                 mTaskName.setText(schItems.getTaskName());

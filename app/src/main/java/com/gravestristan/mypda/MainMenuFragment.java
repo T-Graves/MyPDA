@@ -30,7 +30,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
-        mScheduleButton = (Button) view.findViewById(R.id.schedule);
+        mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
         mScheduleButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -41,7 +41,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             }
         });
 
-        mNotesButton = (Button) view.findViewById(R.id.notes);
+        mNotesButton = (Button) view.findViewById(R.id.notes_button);
         mNotesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -52,7 +52,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             }
         });
 
-        mWorkoutsButton = (Button) view.findViewById(R.id.workouts);
+        mWorkoutsButton = (Button) view.findViewById(R.id.workouts_button);
         mWorkoutsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -63,7 +63,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             }
         });
 
-        mGeneralButton = (Button) view.findViewById(R.id.general);
+        mGeneralButton = (Button) view.findViewById(R.id.general_button);
         mGeneralButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
