@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -90,6 +91,13 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
 
             TextView mTaskName = (TextView) convertView.findViewById(R.id.task_name);
             TextView mTaskDate = (TextView) convertView.findViewById(R.id.task_date);
+            RelativeLayout mDetailLine = (RelativeLayout) convertView.findViewById(R.id.detail_line);
+            if(position % 2 == 0){
+                mDetailLine.setBackgroundResource(R.color.colorDetailLineOne);
+            }else{
+                mDetailLine.setBackgroundResource(R.color.colorDetailLineTwo);
+            }
+
 
             if(mTaskName != null){
                 mTaskName.setText(schItems.getTaskName());

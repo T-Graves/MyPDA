@@ -22,14 +22,14 @@ public class PDASingleton {
      */
     private PDASingleton(Context appContext) {
         mAppContext = appContext;
+        mScheduleItems = new ArrayList<ScheduleItems>();
 
         // Populate with dummy data here
-        mScheduleItems = new ArrayList<ScheduleItems>();
-        for (int i = 0; i < 5; i++) {
+        /*for (int i = 0; i < 5; i++) {
             ScheduleItems scheduleItem = new ScheduleItems();
             scheduleItem.setTaskName("sample name #" + i);
             mScheduleItems.add(scheduleItem);
-        }
+        }*/
 
     }
 
