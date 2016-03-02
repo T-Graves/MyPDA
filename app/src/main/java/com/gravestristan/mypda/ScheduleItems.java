@@ -13,6 +13,7 @@ public class ScheduleItems {
     private UUID mId;
     private String mTaskName;
     private Date mTaskDate;
+    private String mTaskNote;
 
     /**
      * The constructor for each item. It randomly generates a UUID for each item.
@@ -60,6 +61,22 @@ public class ScheduleItems {
     mTaskDate getter and setter
 
      */
+
+    /**
+     * Method to return the note for this task.
+     * @return The note to return
+     */
+    public String getTaskNote(){
+        return mTaskNote;
+    }
+
+    /**
+     * Method to set the task items note.
+     * @param mTaskNote The users note for the task item
+     */
+    public void setTaskNote(String mTaskNote){
+        this.mTaskName = mTaskNote;
+    }
 
     /**
      * Overridden to string method for debugging if needed.
