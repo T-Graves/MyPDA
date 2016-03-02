@@ -3,11 +3,13 @@ package com.gravestristan.mypda;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -41,7 +43,21 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         adapter = new ScheduleAdapter(mScheduleItems);
         mScheduleList.setAdapter(adapter);
 
-        //create the onItemClickListener here
+        mScheduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "Item clicked, do something");
+
+                SingleScheduleItemFragment currentItem = new SingleScheduleItemFragment();
+
+                Bundle args = new Bundle();
+                args.putInt("currentItemPosition", position);
+
+                currentItem.setArguments(args);
+                swapFragmentHandler(currentItem);
+
+            }
+        });
 
         return view;
     }
@@ -59,14 +75,18 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                 return true;
             case R.id.action_new_task:
                 ScheduleItemsCreationFragment createNewItem = new ScheduleItemsCreationFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragmentContainer, createNewItem);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                swapFragmentHandler(createNewItem);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void swapFragmentHandler(Fragment newFragment){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     /**
