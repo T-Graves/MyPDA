@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:demonav="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/tools">
 
     <item
         android:id="@+id/action_new_task"
+        android:icon="@drawable/ic_add_circle_outline_white_24dp"
         android:title="@string/action_new_task"
-        app:showAsAction="never" />
+        demonav:showAsAction="ifRoom|collapseActionView" />
 
     <item
         android:id="@+id/action_help"
