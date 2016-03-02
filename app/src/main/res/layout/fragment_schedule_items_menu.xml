@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Schedule Items"
-        android:id="@+id/textView"
+        android:id="@+id/listview_title"
         android:layout_gravity="center_horizontal" />
 
     <ListView

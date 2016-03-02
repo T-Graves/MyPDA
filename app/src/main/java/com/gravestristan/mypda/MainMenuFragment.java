@@ -28,7 +28,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_menu_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
         mScheduleButton = (Button) view.findViewById(R.id.schedule);
         mScheduleButton.setOnClickListener(new View.OnClickListener(){

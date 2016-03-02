@@ -22,7 +22,7 @@ public class WorkoutsMenuFragment extends Fragment implements AppStatics {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.workouts_menu_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_workouts_menu, container, false);
 
         return view;
     }

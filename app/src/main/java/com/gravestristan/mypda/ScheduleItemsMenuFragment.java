@@ -12,8 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**
@@ -35,14 +33,14 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.schedule_items_menu_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule_items_menu, container, false);
 
         mScheduleList = (ListView) view.findViewById(R.id.list);
 
         adapter = new ScheduleAdapter(mScheduleItems);
         mScheduleList.setAdapter(adapter);
 
-        //create the onItemClickListener here if it is needed
+        //create the onItemClickListener here
 
         return view;
     }
