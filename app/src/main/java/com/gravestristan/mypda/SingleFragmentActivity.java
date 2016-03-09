@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 /**
  *
  * This Class is used to add a fragment to the activity.
@@ -13,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Tristan on 2/20/2016.
  */
 public abstract class SingleFragmentActivity extends AppCompatActivity {
+
+    ArrayList<ScheduleItems> mScheduleItems;
 
     protected abstract Fragment createFragment();
 
@@ -25,10 +29,17 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_pdamain);
 
+
+        mScheduleItems = PDASingleton.get(getApplicationContext()).getScheduleItems();
+        if(mScheduleItems.isEmpty()){
+            PDADBHandler dbHandler = new PDADBHandler(this, null, null, 1);
+            dbHandler.getAllScheduleItems();
+        }
+
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 
-        if(fragment == null){
+        if(fragment == null) {
             fragment = createFragment();
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, fragment)

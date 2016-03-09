@@ -41,7 +41,7 @@ public class PDASingleton {
      *
      * @return
      */
-    public ArrayList<ScheduleItems> getScheduleNames(){
+    public ArrayList<ScheduleItems> getScheduleItems(){
         return mScheduleItems;
     }
 

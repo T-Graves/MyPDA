@@ -35,7 +35,7 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        mScheduleItems = PDASingleton.get(getActivity()).getScheduleNames();
+        mScheduleItems = PDASingleton.get(getActivity()).getScheduleItems();
     }
 
     /**

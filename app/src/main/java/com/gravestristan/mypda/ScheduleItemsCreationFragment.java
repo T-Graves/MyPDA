@@ -36,7 +36,7 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        mScheduleItems = PDASingleton.get(getActivity()).getScheduleNames();
+        mScheduleItems = PDASingleton.get(getActivity()).getScheduleItems();
     }
 
     /**
@@ -62,11 +62,14 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
             public void onClick(View v) {
                 ScheduleItems newItem = new ScheduleItems();
 
+                PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, 1);
+
                 newItem.setTaskName(mTaskName.getText().toString());
                 newItem.setTaskDate(mTaskDate.getText().toString());
                 newItem.setTaskNote(mTaskNote.getText().toString());
 
                 mScheduleItems.add(newItem);
+                dbHandler.addTask(newItem);
                 getFragmentManager().popBackStack();
 
             }
