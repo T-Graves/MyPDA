@@ -9,9 +9,9 @@ import java.util.UUID;
 public class ScheduleItems {
 
     private UUID mId;
-    private String mTaskName;
-    private String mTaskDate;
-    private String mTaskNote;
+    private String mTaskName = "";
+    private String mTaskDate = "";
+    private String mTaskNote = "";
 
     /**
      * The constructor for each item. It randomly generates a UUID for each item.

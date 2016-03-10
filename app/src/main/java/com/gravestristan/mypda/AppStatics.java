@@ -7,5 +7,6 @@ package com.gravestristan.mypda;
 public interface AppStatics {
 
     public static final String TAG = "Debug";
+    public static final int DATABASE_VERSION = 5;
 
 }

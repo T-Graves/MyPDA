@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * Created by Tristan on 2/20/2016.
  */
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class SingleFragmentActivity extends AppCompatActivity implements AppStatics{
 
     ArrayList<ScheduleItems> mScheduleItems;
 
@@ -32,7 +32,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
         mScheduleItems = PDASingleton.get(getApplicationContext()).getScheduleItems();
         if(mScheduleItems.isEmpty()){
-            PDADBHandler dbHandler = new PDADBHandler(this, null, null, 1);
+            PDADBHandler dbHandler = new PDADBHandler(this, null, null, DATABASE_VERSION);
             dbHandler.getAllScheduleItems();
         }
 

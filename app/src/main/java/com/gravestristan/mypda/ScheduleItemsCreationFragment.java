@@ -2,6 +2,7 @@ package com.gravestristan.mypda;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -54,7 +55,7 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         mTaskDate = (EditText) view.findViewById(R.id.task_date);
         mTaskNote = (EditText) view.findViewById(R.id.task_note);
 
-        mCreateButton = (Button) view.findViewById(R.id.new_task_button);
+        mCreateButton = (Button) view.findViewById(R.id.create_or_update_button);
 
         // keep near bottom as it should be the last thing to happen. easier to follow this way
         mCreateButton.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,7 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
             public void onClick(View v) {
                 ScheduleItems newItem = new ScheduleItems();
 
-                PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, 1);
+                PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
 
                 newItem.setTaskName(mTaskName.getText().toString());
                 newItem.setTaskDate(mTaskDate.getText().toString());

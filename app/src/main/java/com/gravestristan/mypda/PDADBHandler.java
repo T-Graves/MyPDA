@@ -7,19 +7,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by student on 3/2/2016.
  */
-public class PDADBHandler extends SQLiteOpenHelper {
+public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
     ArrayList<ScheduleItems> mScheduleItems;
 
-    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "pdaDB.db";
     private static final String TABLE_TASKS = "tasks";
 
     private static final String COLUMN_ID = "_id";
+    private static final String COLUMN_UUID = "task_uuid";
     private static final String COLUMN_TASKNAME = "task_name";
     private static final String COLUMN_TASKDATE = "task_date";
     private static final String COLUMN_TASKNOTE = "task_note";
@@ -46,6 +47,7 @@ public class PDADBHandler extends SQLiteOpenHelper {
         String CREATE_TASKS_TABLE = "CREATE TABLE " +
                 TABLE_TASKS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
+                + COLUMN_UUID + " TEXT,"
                 + COLUMN_TASKNAME + " TEXT,"
                 + COLUMN_TASKDATE + " TEXT,"
                 + COLUMN_TASKNOTE + " TEXT" + ")";
@@ -64,9 +66,14 @@ public class PDADBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     *
+     * @param scheduleItem
+     */
     public void addTask(ScheduleItems scheduleItem){
         ContentValues values = new ContentValues();
 
+        values.put(COLUMN_UUID, scheduleItem.getId().toString());
         values.put(COLUMN_TASKNAME, scheduleItem.getTaskName());
         values.put(COLUMN_TASKDATE, scheduleItem.getTaskDate());
         values.put(COLUMN_TASKNOTE, scheduleItem.getTaskNote());
@@ -77,6 +84,28 @@ public class PDADBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     *
+     * @param scheduleItem
+     */
+    public void updateTask(ScheduleItems scheduleItem){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String UUID = scheduleItem.getId().toString();
+
+        ContentValues updateValues = new ContentValues();
+        updateValues.put(COLUMN_TASKNAME, scheduleItem.getTaskName());
+        updateValues.put(COLUMN_TASKDATE, scheduleItem.getTaskDate());
+        updateValues.put(COLUMN_TASKNOTE, scheduleItem.getTaskNote());
+
+        db.update(TABLE_TASKS, updateValues, COLUMN_UUID + " = '" + UUID + "'", null);
+
+        db.close();
+    }
+
+    /**
+     *
+     */
     public void getAllScheduleItems(){
 
 
@@ -88,13 +117,15 @@ public class PDADBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
             while(cursor.getPosition() != cursor.getCount()){
                 ScheduleItems scheduleItem = new ScheduleItems();
-                scheduleItem.setTaskName(cursor.getString(1));
-                scheduleItem.setTaskDate(cursor.getString(2));
-                scheduleItem.setTaskNote(cursor.getString(3));
+                scheduleItem.setId(UUID.fromString(cursor.getString(1)));
+                scheduleItem.setTaskName(cursor.getString(2));
+                scheduleItem.setTaskDate(cursor.getString(3));
+                scheduleItem.setTaskNote(cursor.getString(4));
                 mScheduleItems.add(scheduleItem);
                 cursor.moveToNext();
             }
             cursor.close();
         }
+        db.close();
     }
 }
