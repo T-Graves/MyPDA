@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="20sp"
             android:text="short text"
-            android:id="@+id/textView1"
+            android:id="@+id/schedule_item_one"
             android:layout_gravity="center_horizontal"
             android:gravity="center" />
 
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="20sp"
             android:text="--------------------max character amount--------------------"
-            android:id="@+id/textView2"
+            android:id="@+id/schedule_item_Two"
             android:layout_gravity="center_horizontal"
             android:gravity="center" />
 
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="20sp"
             android:text="Schedule Item Name ----- Date"
-            android:id="@+id/textView3"
+            android:id="@+id/schedule_item_Three"
             android:layout_gravity="center_horizontal"
             android:gravity="center" />
 

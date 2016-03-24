@@ -42,7 +42,7 @@
             android:ems="10"
             android:id="@+id/task_date"
             android:layout_weight="1"
-            android:hint="MM/DD/YYYY" />
+            android:focusable="false"/>
 
     </LinearLayout>
 

@@ -1,8 +1,8 @@
 package com.gravestristan.mypda;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,9 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * The Schedule item creation fragment.
@@ -27,6 +31,9 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
     EditText mTaskNote;
 
     Button mCreateButton;
+
+    Calendar myCalendar = Calendar.getInstance();
+    DatePickerDialog.OnDateSetListener date;
 
     /**
      *
@@ -57,6 +64,28 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
         mCreateButton = (Button) view.findViewById(R.id.create_or_update_button);
 
+        mTaskDate.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
         // keep near bottom as it should be the last thing to happen. easier to follow this way
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +104,16 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
             }
         });
+
         return view;
+    }
+
+    private void updateLabel() {
+
+        String myFormat = "MM/dd/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        mTaskDate.setText(sdf.format(myCalendar.getTime()));
     }
 
     /**
