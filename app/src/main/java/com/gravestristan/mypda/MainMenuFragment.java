@@ -63,10 +63,14 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
             mTaskNumberTwo.setText(topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate());
             mTaskNumberThree.setText("");
-        }else{
+        }else if(topThree.size() == 3){
             mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
             mTaskNumberTwo.setText(topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate());
             mTaskNumberThree.setText(topThree.get(2).getTaskName() + " : " + topThree.get(2).getTaskDate());
+        }else{
+            mTaskNumberOne.setText("");
+            mTaskNumberTwo.setText("You Have No Tasks Yet");
+            mTaskNumberThree.setText("");
         }
 
         mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
