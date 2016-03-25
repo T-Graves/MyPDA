@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * The main fragment that the user will see when the app starts up. It will
@@ -15,6 +18,10 @@ import android.widget.Button;
  * Created by Tristan on 2/20/2016.
  */
 public class MainMenuFragment extends Fragment implements AppStatics{
+
+    TextView mTaskNumberOne;
+    TextView mTaskNumberTwo;
+    TextView mTaskNumberThree;
 
     Button mScheduleButton;
     Button mNotesButton;
@@ -43,7 +50,24 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
 
-        dbHandler.getThreeClosestTaskItems();
+        ArrayList<ScheduleItems> topThree = dbHandler.getThreeClosestTaskItems();
+
+        mTaskNumberOne = (TextView) view.findViewById(R.id.schedule_item_one);
+        mTaskNumberTwo = (TextView) view.findViewById(R.id.schedule_item_Two);
+        mTaskNumberThree = (TextView) view.findViewById(R.id.schedule_item_Three);
+        if(topThree.size() == 1){
+            mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
+            mTaskNumberTwo.setText("");
+            mTaskNumberThree.setText("");
+        }else if(topThree.size() == 2){
+            mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
+            mTaskNumberTwo.setText(topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate());
+            mTaskNumberThree.setText("");
+        }else{
+            mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
+            mTaskNumberTwo.setText(topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate());
+            mTaskNumberThree.setText(topThree.get(2).getTaskName() + " : " + topThree.get(2).getTaskDate());
+        }
 
         mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
         mScheduleButton.setOnClickListener(new View.OnClickListener(){

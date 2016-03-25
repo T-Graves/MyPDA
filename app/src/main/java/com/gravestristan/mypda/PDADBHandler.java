@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,7 +16,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by student on 3/2/2016.
+ * SQLite database handler class for the MyPDA app. Handles all database queries for the app.
  */
 public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
@@ -69,6 +70,15 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
         onCreate(db);
+    }
+
+    /**
+     * TODO THIS METHOD IS JUST FOR TESTING. DELETE OR MODIFY TO BE SAFER BEFORE APP REVIEW AND RELEASE
+     */
+    public void emptyTasksTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_TASKS);
+        db.close();
     }
 
     /**
@@ -135,24 +145,37 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     /**
      *
      */
-    public void getThreeClosestTaskItems(){
-        String query = "SELECT * FROM " + TABLE_TASKS + " ORDER BY date(" + COLUMN_TASKDATE + ") ASC Limit 3";
+    public ArrayList getThreeClosestTaskItems(){
+        ArrayList<ScheduleItems> returnArray = new ArrayList<ScheduleItems>();
+        String query = "SELECT * FROM " + TABLE_TASKS + " ORDER BY date(" + COLUMN_TASKDATE + ") ASC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
 
         if(cursor.moveToFirst()){
             cursor.moveToFirst();
-            while(cursor.getPosition() != cursor.getCount()){
+            int numberOfItemsGrabbed = 0;
+            while(numberOfItemsGrabbed != NUMBER_OF_TASK_ITEMS_TO_GRAB){
                 try {
-                    Date date = dateFormat.parse(cursor.getString(3));
-                    Date currentDate = new Date();
-                    if(date.after(currentDate) || date.equals(currentDate)){
-                        Log.d(TAG, "date :" + cursor.getString(3));
+                    if(cursor.getPosition() == cursor.getCount()){
+                        break;
                     }else{
-                        Log.d(TAG, "date passed");
+                        Date date = dateFormat.parse(cursor.getString(3));
+                        if(date.after(dateFormat.parse(currentDate)) || date.equals(dateFormat.parse(currentDate))){
+                            ScheduleItems scheduleItem = new ScheduleItems();
+                            scheduleItem.setId(UUID.fromString(cursor.getString(1)));
+                            scheduleItem.setTaskName(cursor.getString(2));
+                            scheduleItem.setTaskDate(cursor.getString(3));
+                            scheduleItem.setTaskNote(cursor.getString(4));
+                            returnArray.add(scheduleItem);
+                            numberOfItemsGrabbed++;
+                        }else{
+                            //TODO have the database delete the old entry here maybe only after a specific amount of time after due date
+                        }
                     }
+
                 } catch (ParseException e){
                     e.printStackTrace();
                 }
@@ -161,5 +184,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
             cursor.close();
         }
         db.close();
+
+        return returnArray;
     }
 }
