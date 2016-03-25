@@ -5,8 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -107,8 +112,6 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
      *
      */
     public void getAllScheduleItems(){
-
-
         String query = "SELECT * FROM " + TABLE_TASKS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -122,6 +125,37 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
                 scheduleItem.setTaskDate(cursor.getString(3));
                 scheduleItem.setTaskNote(cursor.getString(4));
                 mScheduleItems.add(scheduleItem);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        db.close();
+    }
+
+    /**
+     *
+     */
+    public void getThreeClosestTaskItems(){
+        String query = "SELECT * FROM " + TABLE_TASKS + " ORDER BY date(" + COLUMN_TASKDATE + ") ASC Limit 3";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+            while(cursor.getPosition() != cursor.getCount()){
+                try {
+                    Date date = dateFormat.parse(cursor.getString(3));
+                    Date currentDate = new Date();
+                    if(date.after(currentDate) || date.equals(currentDate)){
+                        Log.d(TAG, "date :" + cursor.getString(3));
+                    }else{
+                        Log.d(TAG, "date passed");
+                    }
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
                 cursor.moveToNext();
             }
             cursor.close();

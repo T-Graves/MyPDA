@@ -41,6 +41,10 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
+        PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
+
+        dbHandler.getThreeClosestTaskItems();
+
         mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
         mScheduleButton.setOnClickListener(new View.OnClickListener(){
             @Override

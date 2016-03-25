@@ -108,9 +108,12 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         return view;
     }
 
+    /**
+     *
+     */
     private void updateLabel() {
 
-        String myFormat = "MM/dd/yyyy";
+        String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         mTaskDate.setText(sdf.format(myCalendar.getTime()));

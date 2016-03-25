@@ -118,9 +118,12 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
         return view;
     }
 
+    /**
+     *
+     */
     private void updateLabel() {
 
-        String myFormat = "MM/dd/yyyy";
+        String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         mTaskDate.setText(sdf.format(myCalendar.getTime()));
