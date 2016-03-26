@@ -16,11 +16,12 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
     private ArrayList<ScheduleItems> mScheduleItemsArray;
     private static ScheduleClickListener scheduleClickListener;
+    private static ScheduleLongClickListener scheduleLongClickListener;
 
     /**
      *
      */
-    public static class ScheduleItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ScheduleItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView taskName;
         TextView taskDate;
 
@@ -33,6 +34,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
             taskName = (TextView) itemView.findViewById(R.id.task_name);
             taskDate = (TextView) itemView.findViewById(R.id.task_date);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         /**
@@ -43,7 +45,20 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         public void onClick(View v){
             scheduleClickListener.onItemClick(getAdapterPosition(), v);
         }
+
+        /**
+         *
+         * @param v
+         * @return
+         */
+        @Override
+        public boolean onLongClick(View v) {
+            scheduleLongClickListener.onItemLongClick(getAdapterPosition(), v);
+            return true;
+        }
     }
+
+
 
     /**
      *
@@ -51,6 +66,14 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
      */
     public void setOnItemClickListener(ScheduleClickListener scheduleClickListener){
         this.scheduleClickListener = scheduleClickListener;
+    }
+
+    /**
+     *
+     * @param scheduleLongClickListener
+     */
+    public void setOnItemLongClickListener(ScheduleLongClickListener scheduleLongClickListener){
+        this.scheduleLongClickListener = scheduleLongClickListener;
     }
 
     /**
@@ -103,4 +126,10 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         public void onItemClick(int position, View v);
     }
 
+    /**
+     *
+     */
+    public interface ScheduleLongClickListener {
+        public void onItemLongClick(int position, View v);
+    }
 }

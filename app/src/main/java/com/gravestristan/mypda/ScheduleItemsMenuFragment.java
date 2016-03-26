@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,6 +70,14 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
 
                                 currentItem.setArguments(args);
                                 swapFragmentHandler(currentItem);
+                            }
+                        });
+
+        ((ScheduleRecyclerViewAdapter) mAdapter).setOnItemLongClickListener(new
+                        ScheduleRecyclerViewAdapter.ScheduleLongClickListener(){
+                            @Override
+                            public void onItemLongClick(int position, View v){
+                                Log.d(TAG, "pressed long");
                             }
                         });
 
