@@ -2,6 +2,7 @@ package com.gravestristan.mypda;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -63,7 +64,7 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         ((ScheduleRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
                         ScheduleRecyclerViewAdapter.ScheduleClickListener() {
                             @Override
-                            public void onItemClick(int position, View v){
+                            public void onItemClick(int position, View v) {
                                 SingleScheduleItemFragment currentItem = new SingleScheduleItemFragment();
 
                                 Bundle args = new Bundle();
@@ -79,6 +80,7 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                             @Override
                             public void onItemLongClick(int position, View v){
                                 final int itemPosition = position;
+                                final View view = v;
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                 builder.setCancelable(true);
                                 builder.setTitle("Delete Item");
@@ -91,6 +93,7 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                                         dbHandler.close();
                                         mScheduleItems.remove(itemPosition);
                                         ((ScheduleRecyclerViewAdapter) mAdapter).deleteItem(itemPosition);
+                                        itemDeletedSnackBar(view);
                                     }
                                 });
                                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -105,6 +108,13 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                         });
 
         return view;
+    }
+
+    public void itemDeletedSnackBar(View view){
+        Snackbar snackbar = Snackbar
+                .make(view, "Schedule Item Deleted", Snackbar.LENGTH_SHORT);
+
+        snackbar.show();
     }
 
     /**
