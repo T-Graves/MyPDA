@@ -5,9 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -78,7 +76,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
      */
     public void deleteItemFromTable(ScheduleItems scheduleItem){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_TASKS + " WHERE " + COLUMN_UUID + " = '" + scheduleItem.getId() + "'");
+        db.execSQL("DELETE FROM " + TABLE_TASKS + " WHERE " + COLUMN_UUID + " = '" + scheduleItem.getTaskId() + "'");
     }
 
     /**
@@ -88,7 +86,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     public void addTask(ScheduleItems scheduleItem){
         ContentValues values = new ContentValues();
 
-        values.put(COLUMN_UUID, scheduleItem.getId().toString());
+        values.put(COLUMN_UUID, scheduleItem.getTaskId().toString());
         values.put(COLUMN_TASKNAME, scheduleItem.getTaskName());
         values.put(COLUMN_TASKDATE, scheduleItem.getTaskDate());
         values.put(COLUMN_TASKNOTE, scheduleItem.getTaskNote());
@@ -106,7 +104,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     public void updateTask(ScheduleItems scheduleItem){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String UUID = scheduleItem.getId().toString();
+        String UUID = scheduleItem.getTaskId().toString();
 
         ContentValues updateValues = new ContentValues();
         updateValues.put(COLUMN_TASKNAME, scheduleItem.getTaskName());
@@ -130,7 +128,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
             cursor.moveToFirst();
             while(cursor.getPosition() != cursor.getCount()){
                 ScheduleItems scheduleItem = new ScheduleItems();
-                scheduleItem.setId(UUID.fromString(cursor.getString(1)));
+                scheduleItem.setTaskId(UUID.fromString(cursor.getString(1)));
                 scheduleItem.setTaskName(cursor.getString(2));
                 scheduleItem.setTaskDate(cursor.getString(3));
                 scheduleItem.setTaskNote(cursor.getString(4));
@@ -165,7 +163,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
                         Date date = dateFormat.parse(cursor.getString(3));
                         if(date.after(dateFormat.parse(currentDate)) || date.equals(dateFormat.parse(currentDate))){
                             ScheduleItems scheduleItem = new ScheduleItems();
-                            scheduleItem.setId(UUID.fromString(cursor.getString(1)));
+                            scheduleItem.setTaskId(UUID.fromString(cursor.getString(1)));
                             scheduleItem.setTaskName(cursor.getString(2));
                             scheduleItem.setTaskDate(cursor.getString(3));
                             scheduleItem.setTaskNote(cursor.getString(4));

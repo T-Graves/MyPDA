@@ -1,6 +1,5 @@
 package com.gravestristan.mypda;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -24,16 +23,15 @@ public class ScheduleItems {
      * The get method for the UUID.
      * @return returns mId (the UUID) for the item.
      */
-    public UUID getId(){
+    public UUID getTaskId(){
         return mId;
     }
 
     /**
      * The set method for the UUID.
-     * This method will most likely not be used, but it's here just in case.
      * @param mId The desired UUID for this item.
      */
-    public void setId(UUID mId){
+    public void setTaskId(UUID mId){
         this.mId = mId;
     }
 
@@ -92,8 +90,6 @@ public class ScheduleItems {
      */
     @Override
     public String toString(){
-        return mId + " " + mTaskName; // Add mTaskDate later
+        return mId + " : " + mTaskName + " : " + mTaskDate;
     }
-
-
 }

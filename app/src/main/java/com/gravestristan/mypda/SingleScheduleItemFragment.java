@@ -61,7 +61,7 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_item_creation, container, false);
 
-        mCurrentUUID = mScheduleItems.get(position).getId();
+        mCurrentUUID = mScheduleItems.get(position).getTaskId();
 
         mTaskName = (EditText) view.findViewById(R.id.task_name);
         mTaskName.setText(mScheduleItems.get(position).getTaskName());
@@ -102,7 +102,7 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
 
                 PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
 
-                newItem.setId(mCurrentUUID);
+                newItem.setTaskId(mCurrentUUID);
                 newItem.setTaskName(mTaskName.getText().toString());
                 newItem.setTaskDate(mTaskDate.getText().toString());
                 newItem.setTaskNote(mTaskNote.getText().toString());

@@ -52,7 +52,7 @@ public class PDASingleton {
      */
     public ScheduleItems getScheduleItem(UUID id) {
         for (ScheduleItems scheduleItem : mScheduleItems) {
-            if(scheduleItem.getId().equals(id)){
+            if(scheduleItem.getTaskId().equals(id)){
                 return scheduleItem;
             }
         }
