@@ -3,17 +3,13 @@ package com.gravestristan.mypda;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,8 +19,9 @@ import java.util.ArrayList;
 public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
 
     private ArrayList<ScheduleItems> mScheduleItems;
-    ListView mScheduleList;
-    ScheduleAdapter adapter;
+    private RecyclerView mScheduleList;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     /**
      *
@@ -49,26 +46,31 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_items_menu, container, false);
 
-        mScheduleList = (ListView) view.findViewById(R.id.list);
+        mScheduleList = (RecyclerView) view.findViewById(R.id.schedule_recycler_view);
+        mScheduleList.setHasFixedSize(true);
 
-        adapter = new ScheduleAdapter(mScheduleItems);
-        mScheduleList.setAdapter(adapter);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mScheduleList.setLayoutManager(mLayoutManager);
+        mAdapter = new ScheduleRecyclerViewAdapter(mScheduleItems);
 
-        mScheduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "Item clicked, do something");
+        mScheduleList.setAdapter(mAdapter);
+        RecyclerView.ItemDecoration itemDecoration =
+                new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        mScheduleList.addItemDecoration(itemDecoration);
 
-                SingleScheduleItemFragment currentItem = new SingleScheduleItemFragment();
+        ((ScheduleRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
+                        ScheduleRecyclerViewAdapter.ScheduleClickListener() {
+                            @Override
+                            public void onItemClick(int position, View v){
+                                SingleScheduleItemFragment currentItem = new SingleScheduleItemFragment();
 
-                Bundle args = new Bundle();
-                args.putInt("currentItemPosition", position);
+                                Bundle args = new Bundle();
+                                args.putInt("currentItemPosition", position);
 
-                currentItem.setArguments(args);
-                swapFragmentHandler(currentItem);
-
-            }
-        });
+                                currentItem.setArguments(args);
+                                swapFragmentHandler(currentItem);
+                            }
+                        });
 
         return view;
     }
@@ -111,53 +113,5 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         transaction.replace(R.id.fragmentContainer, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }
-
-    /**
-     *
-     */
-    private class ScheduleAdapter extends ArrayAdapter<ScheduleItems> {
-        /**
-         *
-         * @param scheduleItems
-         */
-        public ScheduleAdapter(ArrayList<ScheduleItems> scheduleItems) {
-            super(getActivity(), 0, scheduleItems);
-        }
-
-        /**
-         *
-         * @param position
-         * @param convertView
-         * @param parent
-         * @return
-         */
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent){
-            if(convertView == null) {
-                convertView = getActivity().getLayoutInflater()
-                            .inflate(R.layout.schedule_detail_line, null);
-            }
-            ScheduleItems schItems = getItem(position);
-
-            TextView mTaskName = (TextView) convertView.findViewById(R.id.task_name);
-            TextView mTaskDate = (TextView) convertView.findViewById(R.id.task_date);
-            RelativeLayout mDetailLine = (RelativeLayout) convertView.findViewById(R.id.detail_line);
-            if(position % 2 == 0){
-                mDetailLine.setBackgroundResource(R.color.colorDetailLineOne);
-            }else{
-                mDetailLine.setBackgroundResource(R.color.colorDetailLineTwo);
-            }
-
-
-            if(mTaskName != null){
-                mTaskName.setText(schItems.getTaskName());
-            }
-            if(mTaskDate != null){
-                mTaskDate.setText(schItems.getTaskDate());
-            }
-
-            return convertView;
-        }
     }
 }
