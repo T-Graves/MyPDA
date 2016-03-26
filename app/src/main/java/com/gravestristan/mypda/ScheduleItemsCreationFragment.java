@@ -13,9 +13,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -90,6 +92,11 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mTaskDate.length() == 0){
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String currentDate = dateFormat.format(new Date());
+                    mTaskDate.setText(currentDate);
+                }
                 ScheduleItems newItem = new ScheduleItems();
 
                 PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);

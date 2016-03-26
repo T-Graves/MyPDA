@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,7 +79,6 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                             @Override
                             public void onItemLongClick(int position, View v){
                                 final int itemPosition = position;
-                                Log.d(TAG, "pressed long");
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                 builder.setCancelable(true);
                                 builder.setTitle("Delete Item");
@@ -88,7 +86,6 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        //Log.d(TAG, ": " + itemPosition);
                                         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
                                         dbHandler.deleteItemFromTable(mScheduleItems.get(itemPosition));
                                         dbHandler.close();
