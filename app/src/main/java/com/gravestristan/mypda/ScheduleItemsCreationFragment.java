@@ -2,6 +2,7 @@ package com.gravestristan.mypda;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -108,6 +109,9 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
                 mScheduleItems.add(newItem);
                 dbHandler.addTask(newItem);
                 getFragmentManager().popBackStack();
+                Snackbar snackBar = Snackbar
+                        .make(getView(), "Schedule Item Created", Snackbar.LENGTH_SHORT);
+                snackBar.show();
 
             }
         });
