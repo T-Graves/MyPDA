@@ -84,6 +84,10 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         mScheduleItemsArray = dataSet;
     }
 
+    public void deleteItem(int index) {
+        notifyItemRemoved(index);
+    }
+
     /**
      *
      * @param parent

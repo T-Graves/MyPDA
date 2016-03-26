@@ -73,12 +73,12 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     * TODO THIS METHOD IS JUST FOR TESTING. DELETE OR MODIFY TO BE SAFER BEFORE APP REVIEW AND RELEASE
+     *
+     * @param scheduleItem
      */
-    public void emptyTasksTable(){
+    public void deleteItemFromTable(ScheduleItems scheduleItem){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_TASKS);
-        db.close();
+        db.execSQL("DELETE FROM " + TABLE_TASKS + " WHERE " + COLUMN_UUID + " = '" + scheduleItem.getId() + "'");
     }
 
     /**

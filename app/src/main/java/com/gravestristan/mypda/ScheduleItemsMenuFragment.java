@@ -1,8 +1,10 @@
 package com.gravestristan.mypda;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -77,7 +79,31 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                         ScheduleRecyclerViewAdapter.ScheduleLongClickListener(){
                             @Override
                             public void onItemLongClick(int position, View v){
+                                final int itemPosition = position;
                                 Log.d(TAG, "pressed long");
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                builder.setCancelable(true);
+                                builder.setTitle("Delete Item");
+                                builder.setMessage("Delete This Schedule Item?");
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //Log.d(TAG, ": " + itemPosition);
+                                        PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
+                                        dbHandler.deleteItemFromTable(mScheduleItems.get(itemPosition));
+                                        dbHandler.close();
+                                        mScheduleItems.remove(itemPosition);
+                                        ((ScheduleRecyclerViewAdapter) mAdapter).deleteItem(itemPosition);
+                                    }
+                                });
+                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                AlertDialog alert = builder.create();
+                                alert.show();
                             }
                         });
 
