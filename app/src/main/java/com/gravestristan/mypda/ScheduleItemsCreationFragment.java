@@ -92,8 +92,8 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mTaskDate.length() == 0){
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                if(mTaskDate.getText().toString().equals("")){
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     String currentDate = dateFormat.format(new Date());
                     mTaskDate.setText(currentDate);
                 }
