@@ -89,7 +89,7 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
-                                        dbHandler.deleteItemFromTable(mScheduleItems.get(itemPosition));
+                                        dbHandler.deleteItemFromTaskTable(mScheduleItems.get(itemPosition));
                                         dbHandler.close();
                                         mScheduleItems.remove(itemPosition);
                                         ((ScheduleRecyclerViewAdapter) mAdapter).deleteItem(itemPosition);

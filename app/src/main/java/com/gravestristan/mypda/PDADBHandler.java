@@ -22,12 +22,18 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
     private static final String DATABASE_NAME = "pdaDB.db";
     private static final String TABLE_TASKS = "tasks";
+    private static final String TABLE_NOTES = "notes";
 
-    private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_UUID = "task_uuid";
-    private static final String COLUMN_TASKNAME = "task_name";
-    private static final String COLUMN_TASKDATE = "task_date";
-    private static final String COLUMN_TASKNOTE = "task_note";
+    private static final String TASKS_COLUMN_ID = "_id";
+    private static final String TASKS_COLUMN_UUID = "task_uuid";
+    private static final String TASKS_COLUMN_TASKNAME = "task_name";
+    private static final String TASKS_COLUMN_TASKDATE = "task_date";
+    private static final String TASKS_COLUMN_TASKNOTE = "task_note";
+
+    private static final String NOTES_COLUMN_ID = "_id";
+    private static final String NOTES_COLUMN_UUID = "task_uuid";
+    private static final String NOTES_COLUMN_NOTENAME = "note_name";
+    private static final String NOTES_COLUMN_NOTECONTENTS = "note_contents";
 
     /**
      *
@@ -48,14 +54,21 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TASKS_TABLE = "CREATE TABLE " +
-                TABLE_TASKS + "("
-                + COLUMN_ID + " INTEGER PRIMARY KEY,"
-                + COLUMN_UUID + " TEXT,"
-                + COLUMN_TASKNAME + " TEXT,"
-                + COLUMN_TASKDATE + " TEXT,"
-                + COLUMN_TASKNOTE + " TEXT" + ")";
+        String CREATE_TASKS_TABLE = "CREATE TABLE "
+                + TABLE_TASKS + "("
+                + TASKS_COLUMN_ID + " INTEGER PRIMARY KEY,"
+                + TASKS_COLUMN_UUID + " TEXT,"
+                + TASKS_COLUMN_TASKNAME + " TEXT,"
+                + TASKS_COLUMN_TASKDATE + " TEXT,"
+                + TASKS_COLUMN_TASKNOTE + " TEXT" + ")";
         db.execSQL(CREATE_TASKS_TABLE);
+        String CREATE_NOTES_TABLE = "CREATE TABLE "
+                + TABLE_NOTES + "("
+                + NOTES_COLUMN_ID + " INTEGER PRIMARY KEY,"
+                + NOTES_COLUMN_UUID + " TEXT,"
+                + NOTES_COLUMN_NOTENAME + " TEXT,"
+                + NOTES_COLUMN_NOTECONTENTS + " TEXT" + ")";
+        db.execSQL(CREATE_NOTES_TABLE);
     }
 
     /**
@@ -67,16 +80,19 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
         onCreate(db);
     }
+
+    //Scheduling function database control starts here
 
     /**
      *
      * @param scheduleItem
      */
-    public void deleteItemFromTable(ScheduleItems scheduleItem){
+    public void deleteItemFromTaskTable(ScheduleItems scheduleItem){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_TASKS + " WHERE " + COLUMN_UUID + " = '" + scheduleItem.getTaskId() + "'");
+        db.execSQL("DELETE FROM " + TABLE_TASKS + " WHERE " + TASKS_COLUMN_UUID + " = '" + scheduleItem.getTaskId() + "'");
     }
 
     /**
@@ -86,10 +102,10 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     public void addTask(ScheduleItems scheduleItem){
         ContentValues values = new ContentValues();
 
-        values.put(COLUMN_UUID, scheduleItem.getTaskId().toString());
-        values.put(COLUMN_TASKNAME, scheduleItem.getTaskName());
-        values.put(COLUMN_TASKDATE, scheduleItem.getTaskDate());
-        values.put(COLUMN_TASKNOTE, scheduleItem.getTaskNote());
+        values.put(TASKS_COLUMN_UUID, scheduleItem.getTaskId().toString());
+        values.put(TASKS_COLUMN_TASKNAME, scheduleItem.getTaskName());
+        values.put(TASKS_COLUMN_TASKDATE, scheduleItem.getTaskDate());
+        values.put(TASKS_COLUMN_TASKNOTE, scheduleItem.getTaskNote());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -107,11 +123,11 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         String UUID = scheduleItem.getTaskId().toString();
 
         ContentValues updateValues = new ContentValues();
-        updateValues.put(COLUMN_TASKNAME, scheduleItem.getTaskName());
-        updateValues.put(COLUMN_TASKDATE, scheduleItem.getTaskDate());
-        updateValues.put(COLUMN_TASKNOTE, scheduleItem.getTaskNote());
+        updateValues.put(TASKS_COLUMN_TASKNAME, scheduleItem.getTaskName());
+        updateValues.put(TASKS_COLUMN_TASKDATE, scheduleItem.getTaskDate());
+        updateValues.put(TASKS_COLUMN_TASKNOTE, scheduleItem.getTaskNote());
 
-        db.update(TABLE_TASKS, updateValues, COLUMN_UUID + " = '" + UUID + "'", null);
+        db.update(TABLE_TASKS, updateValues, TASKS_COLUMN_UUID + " = '" + UUID + "'", null);
 
         db.close();
     }
@@ -119,7 +135,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     /**
      *
      */
-    public void getAllScheduleItems(){
+    public void getAllTaskItems(){
         String query = "SELECT * FROM " + TABLE_TASKS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -145,7 +161,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
      */
     public ArrayList getThreeClosestTaskItems(){
         ArrayList<ScheduleItems> returnArray = new ArrayList<ScheduleItems>();
-        String query = "SELECT * FROM " + TABLE_TASKS + " ORDER BY date(" + COLUMN_TASKDATE + ") ASC";
+        String query = "SELECT * FROM " + TABLE_TASKS + " ORDER BY date(" + TASKS_COLUMN_TASKDATE + ") ASC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -185,4 +201,77 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
         return returnArray;
     }
+    //Scheduling function database control ends here
+
+    //Notes function database control starts here
+
+    /**
+     *
+     * @param noteObject
+     */
+    public void deleteNoteFromNoteTable(NoteObjects noteObject){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NOTES + " WHERE " + NOTES_COLUMN_UUID + " = '" + noteObject.getNoteId() + "'");
+    }
+
+    /**
+     *
+     * @param noteObject
+     */
+    public void addNote(NoteObjects noteObject){
+        ContentValues values = new ContentValues();
+
+        values.put(NOTES_COLUMN_UUID, noteObject.getNoteId().toString());
+        values.put(NOTES_COLUMN_NOTENAME, noteObject.getNoteTitle());
+        values.put(NOTES_COLUMN_NOTECONTENTS, noteObject.getNoteContents());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(TABLE_NOTES, null, values);
+        db.close();
+    }
+
+    /**
+     *
+     * @param noteObject
+     */
+    public void updateNote(NoteObjects noteObject){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String UUID = noteObject.getNoteId().toString();
+
+        ContentValues updateValues = new ContentValues();
+        updateValues.put(NOTES_COLUMN_NOTENAME, noteObject.getNoteTitle());
+        updateValues.put(NOTES_COLUMN_NOTECONTENTS, noteObject.getNoteContents());
+
+        db.update(TABLE_NOTES, updateValues, NOTES_COLUMN_UUID + " = '" + UUID + "'", null);
+
+        db.close();
+    }
+
+    /**
+     *
+     */
+    public ArrayList<NoteObjects> getAllNoteItems(){
+        ArrayList<NoteObjects> mNoteObjects = new ArrayList<NoteObjects>();
+        String query = "SELECT * FROM " + TABLE_NOTES;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+            while(cursor.getPosition() != cursor.getCount()){
+                NoteObjects noteObject = new NoteObjects();
+                noteObject.setNoteId(UUID.fromString(cursor.getString(1)));
+                noteObject.setNoteTitle(cursor.getString(2));
+                noteObject.setNoteContents(cursor.getString(3));
+                mNoteObjects.add(noteObject);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        db.close();
+        return mNoteObjects;
+    }
+
 }

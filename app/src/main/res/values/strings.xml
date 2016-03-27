@@ -3,6 +3,7 @@
 
     <string name="action_about">About MyPDA</string>
     <string name="action_new_task">Create New Task</string>
+    <string name="action_new_note">Create New Note</string>
 
     <string name="schedule_button">Schedule</string>
     <string name="notes_button">Notes</string>

@@ -51,6 +51,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
 
         ArrayList<ScheduleItems> topThree = dbHandler.getThreeClosestTaskItems();
+        dbHandler.close();
 
         mTaskNumberOne = (TextView) view.findViewById(R.id.schedule_item_one);
         mTaskNumberTwo = (TextView) view.findViewById(R.id.schedule_item_Two);

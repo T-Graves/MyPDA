@@ -33,7 +33,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
         mScheduleItems = PDASingleton.get(getApplicationContext()).getScheduleItems();
         if(mScheduleItems.isEmpty()){
             PDADBHandler dbHandler = new PDADBHandler(this, null, null, DATABASE_VERSION);
-            dbHandler.getAllScheduleItems();
+            dbHandler.getAllTaskItems();
         }
 
         FragmentManager fm = getSupportFragmentManager();

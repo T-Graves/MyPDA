@@ -110,6 +110,7 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
                 mScheduleItems.set(position, newItem);
 
                 dbHandler.updateTask(mScheduleItems.get(position));
+                dbHandler.close();
                 getFragmentManager().popBackStack();
             }
         });

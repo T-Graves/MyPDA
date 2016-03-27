@@ -108,6 +108,7 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
                 mScheduleItems.add(newItem);
                 dbHandler.addTask(newItem);
+                dbHandler.close();
                 getFragmentManager().popBackStack();
                 Snackbar snackBar = Snackbar
                         .make(getView(), "Schedule Item Created", Snackbar.LENGTH_SHORT);

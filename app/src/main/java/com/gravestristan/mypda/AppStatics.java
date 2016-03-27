@@ -7,7 +7,7 @@ package com.gravestristan.mypda;
 public interface AppStatics {
 
     String TAG = "Debug";
-    int DATABASE_VERSION = 5;
+    int DATABASE_VERSION = 6;
     int NUMBER_OF_TASK_ITEMS_TO_GRAB = 3;
 
 }
