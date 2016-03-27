@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,8 +18,14 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
 
     public static class NoteItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        TextView noteTitle;
+        TextView noteContent;
+
         public NoteItemHolder(View itemView){
             super(itemView);
+
+            noteTitle = (TextView) itemView.findViewById(R.id.note_name);
+            noteContent = (TextView) itemView.findViewById(R.id.note_content);
 
             itemView.setOnClickListener(this);
         }
@@ -28,6 +35,10 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
             noteClickListener.onItemClick(getAdapterPosition(), v);
         }
 
+    }
+
+    public void setOnItemClickListener(NoteClickListener noteClickListener){
+        this.noteClickListener = noteClickListener;
     }
 
     public NotesRecyclerViewAdapter(ArrayList<NoteObjects> dataSet) {
@@ -48,7 +59,8 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
 
     @Override
     public void onBindViewHolder(NoteItemHolder holder, int position){
-
+        holder.noteTitle.setText(mNoteObjectsArray.get(position).getNoteTitle());
+        holder.noteContent.setText(mNoteObjectsArray.get(position).getNoteContents());
     }
 
     @Override

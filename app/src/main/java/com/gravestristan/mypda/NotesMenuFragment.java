@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,6 +57,14 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
         mNoteList.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
         mNoteList.addItemDecoration(itemDecoration);
+
+        ((NotesRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
+                        NotesRecyclerViewAdapter.NoteClickListener() {
+                            @Override
+                            public void onItemClick(int position, View v){
+                                Log.d(TAG, "Note item clicked : " + position);
+                            }
+                        });
 
         return view;
     }
