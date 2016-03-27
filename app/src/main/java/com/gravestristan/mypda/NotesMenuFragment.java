@@ -52,8 +52,9 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
         mLayoutManager = new LinearLayoutManager(getContext());
         mNoteList.setLayoutManager(mLayoutManager);
         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
-        mAdapter = new NotesRecyclerViewAdapter(dbHandler.getAllNoteItems());
+        mNoteObjects = dbHandler.getAllNoteItems();
         dbHandler.close();
+        mAdapter = new NotesRecyclerViewAdapter(mNoteObjects);
         mNoteList.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
         mNoteList.addItemDecoration(itemDecoration);
@@ -62,7 +63,12 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
                         NotesRecyclerViewAdapter.NoteClickListener() {
                             @Override
                             public void onItemClick(int position, View v){
-                                Log.d(TAG, "Note item clicked : " + position);
+                                SingleNoteFragment currentNote = new SingleNoteFragment();
+                                Bundle args = new Bundle();
+                                args.putString("currentNoteUUID", mNoteObjects.get(position).getNoteId().toString());
+
+                                currentNote.setArguments(args);
+                                swapFragmentHandler(currentNote);
                             }
                         });
 

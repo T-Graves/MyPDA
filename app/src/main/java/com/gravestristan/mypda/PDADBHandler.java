@@ -214,6 +214,27 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         db.execSQL("DELETE FROM " + TABLE_NOTES + " WHERE " + NOTES_COLUMN_UUID + " = '" + noteObject.getNoteId() + "'");
     }
 
+    public NoteObjects getNote(UUID currentUUID){
+        NoteObjects noteObject = new NoteObjects();
+        String query = "SELECT * FROM " + TABLE_NOTES + " WHERE " + NOTES_COLUMN_UUID + " = '" + currentUUID + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+
+            noteObject.setNoteId(UUID.fromString(cursor.getString(1)));
+            noteObject.setNoteTitle(cursor.getString(2));
+            noteObject.setNoteContents(cursor.getString(3));
+
+            cursor.close();
+        }
+
+        db.close();
+
+        return noteObject;
+    }
+
     /**
      *
      * @param noteObject
