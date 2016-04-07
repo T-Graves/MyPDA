@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyPDA</string>
+    <string name="app_name">My PDA</string>
 
     <string name="action_about">About MyPDA</string>
     <string name="action_new_task">Create New Task</string>
