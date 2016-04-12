@@ -61,4 +61,17 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
 
         });
     }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        int stackHeight = getSupportFragmentManager().getBackStackEntryCount();
+        if (stackHeight > 0) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+        }
+    }
 }
