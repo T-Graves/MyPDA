@@ -32,7 +32,6 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
     private static final String NOTES_COLUMN_ID = "_id";
     private static final String NOTES_COLUMN_UUID = "task_uuid";
-    private static final String NOTES_COLUMN_NOTENAME = "note_name";
     private static final String NOTES_COLUMN_NOTECONTENTS = "note_contents";
 
     /**
@@ -66,7 +65,6 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
                 + TABLE_NOTES + "("
                 + NOTES_COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + NOTES_COLUMN_UUID + " TEXT,"
-                + NOTES_COLUMN_NOTENAME + " TEXT,"
                 + NOTES_COLUMN_NOTECONTENTS + " TEXT" + ")";
         db.execSQL(CREATE_NOTES_TABLE);
     }
@@ -224,8 +222,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
             cursor.moveToFirst();
 
             noteObject.setNoteId(UUID.fromString(cursor.getString(1)));
-            noteObject.setNoteTitle(cursor.getString(2));
-            noteObject.setNoteContents(cursor.getString(3));
+            noteObject.setNoteContents(cursor.getString(2));
 
             cursor.close();
         }
@@ -243,7 +240,6 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         ContentValues values = new ContentValues();
 
         values.put(NOTES_COLUMN_UUID, noteObject.getNoteId().toString());
-        values.put(NOTES_COLUMN_NOTENAME, noteObject.getNoteTitle());
         values.put(NOTES_COLUMN_NOTECONTENTS, noteObject.getNoteContents());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -262,7 +258,6 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         String UUID = noteObject.getNoteId().toString();
 
         ContentValues updateValues = new ContentValues();
-        updateValues.put(NOTES_COLUMN_NOTENAME, noteObject.getNoteTitle());
         updateValues.put(NOTES_COLUMN_NOTECONTENTS, noteObject.getNoteContents());
 
         db.update(TABLE_NOTES, updateValues, NOTES_COLUMN_UUID + " = '" + UUID + "'", null);
@@ -284,8 +279,7 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
             while(cursor.getPosition() != cursor.getCount()){
                 NoteObjects noteObject = new NoteObjects();
                 noteObject.setNoteId(UUID.fromString(cursor.getString(1)));
-                noteObject.setNoteTitle(cursor.getString(2));
-                noteObject.setNoteContents(cursor.getString(3));
+                noteObject.setNoteContents(cursor.getString(2));
                 mNoteObjects.add(noteObject);
                 cursor.moveToNext();
             }

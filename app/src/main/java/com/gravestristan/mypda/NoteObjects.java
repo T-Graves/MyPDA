@@ -8,7 +8,6 @@ import java.util.UUID;
 public class NoteObjects implements AppStatics {
 
     private UUID mId;
-    private String mNoteTitle;
     private String mNoteContents;
 
     /**
@@ -38,22 +37,6 @@ public class NoteObjects implements AppStatics {
      *
      * @return
      */
-    public String getNoteTitle(){
-        return mNoteTitle;
-    }
-
-    /**
-     *
-     * @param mNoteTitle
-     */
-    public void setNoteTitle(String mNoteTitle){
-        this.mNoteTitle = mNoteTitle;
-    }
-
-    /**
-     *
-     * @return
-     */
     public String getNoteContents(){
         return mNoteContents;
     }
@@ -72,6 +55,6 @@ public class NoteObjects implements AppStatics {
      */
     @Override
     public String toString(){
-        return mId + " : " + mNoteTitle;
+        return "note UUID: " + mId;
     }
 }

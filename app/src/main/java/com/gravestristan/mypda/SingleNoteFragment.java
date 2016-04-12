@@ -2,6 +2,8 @@ package com.gravestristan.mypda;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,10 +20,7 @@ import java.util.UUID;
  */
 public class SingleNoteFragment extends Fragment implements AppStatics{
 
-    EditText mNoteTitle;
     EditText mNoteContent;
-
-    Button mUpdateButton;
 
     private UUID mCurrentUUID;
 
@@ -40,47 +39,41 @@ public class SingleNoteFragment extends Fragment implements AppStatics{
         NoteObjects currentNote = dbHandler.getNote(mCurrentUUID);
         dbHandler.close();
 
-        mNoteTitle = (EditText) view.findViewById(R.id.note_title_field);
-        mNoteTitle.setText(currentNote.getNoteTitle());
         mNoteContent = (EditText) view.findViewById(R.id.note_content_field);
         mNoteContent.setText(currentNote.getNoteContents());
-
-        mUpdateButton = (Button) view.findViewById(R.id.create_or_update_button);
-        mUpdateButton.setText("Update");
-
-        mUpdateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NoteObjects noteObject = new NoteObjects();
-                PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
-
-                noteObject.setNoteId(mCurrentUUID);
-                noteObject.setNoteTitle(mNoteTitle.getText().toString());
-                noteObject.setNoteContents(mNoteContent.getText().toString());
-
-                dbHandler.updateNote(noteObject);
-
-                dbHandler.close();
-                getFragmentManager().popBackStack();
-            }
-        });
 
         return view;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_save_note).setVisible(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                getFragmentManager().popBackStack();
+                saveNote();
+                return true;
+            case R.id.action_save_note:
+                saveNote();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void saveNote(){
+        NoteObjects noteObject = new NoteObjects();
+        PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
+
+        noteObject.setNoteId(mCurrentUUID);
+        noteObject.setNoteContents(mNoteContent.getText().toString());
+
+        dbHandler.updateNote(noteObject);
+
+        dbHandler.close();
+        getFragmentManager().popBackStack();
     }
 }

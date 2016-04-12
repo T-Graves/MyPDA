@@ -1,39 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Note Title"
-            android:id="@+id/note_title_label" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/note_title_field"
-            android:layout_gravity="center_horizontal"/>
-
-    </LinearLayout>
+    android:layout_gravity="center_horizontal">
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/note_content_field"
-        android:hint="Enter Note Content" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create"
-        android:id="@+id/create_or_update_button"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:hint="Enter Note Content"
+        android:gravity="top|start"
+        android:background="#00000000"/>
+</RelativeLayout>

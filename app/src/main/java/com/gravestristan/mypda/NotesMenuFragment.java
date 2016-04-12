@@ -78,7 +78,6 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
         ((NotesRecyclerViewAdapter) mAdapter).setOnItemLongClickListener(new NotesRecyclerViewAdapter.NoteLongClickListener() {
             @Override
             public void onItemLongClick(int position, View v) {
-                //Log.d(TAG, "Note clicked long");
                 final int itemPosition = position;
                 final View view = v;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

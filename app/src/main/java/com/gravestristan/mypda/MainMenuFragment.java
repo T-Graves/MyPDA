@@ -113,7 +113,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     public void topThreeHandler(){
         if(topThree.size() == 1){
             if(topThree.get(0).getTaskName().length() > 25){
-                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + " : " + topThree.get(0).getTaskDate();
+                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + "... : " + topThree.get(0).getTaskDate();
                 mTaskNumberOne.setText(slimmedTaskNameAndDate);
             }else{
                 String taskNameAndDate = topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate();
@@ -123,7 +123,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             mTaskNumberThree.setText("");
         }else if(topThree.size() == 2){
             if(topThree.get(0).getTaskName().length() > 25){
-                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + " : " + topThree.get(0).getTaskDate();
+                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + "... : " + topThree.get(0).getTaskDate();
                 mTaskNumberOne.setText(slimmedTaskNameAndDate);
             }else{
                 String taskNameAndDate = topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate();
@@ -131,7 +131,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             }
 
             if(topThree.get(1).getTaskName().length() > 25){
-                String slimmedTaskNameAndDate = topThree.get(1).getTaskName().substring(0,24) + " : " + topThree.get(1).getTaskDate();
+                String slimmedTaskNameAndDate = topThree.get(1).getTaskName().substring(0,24) + "... : " + topThree.get(1).getTaskDate();
                 mTaskNumberTwo.setText(slimmedTaskNameAndDate);
             }else{
                 String taskNameAndDate = topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate();
@@ -140,7 +140,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             mTaskNumberThree.setText("");
         }else if(topThree.size() == 3){
             if(topThree.get(0).getTaskName().length() > 25){
-                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + " : " + topThree.get(0).getTaskDate();
+                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + "... : " + topThree.get(0).getTaskDate();
                 mTaskNumberOne.setText(slimmedTaskNameAndDate);
             }else{
                 String taskNameAndDate = topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate();
@@ -148,7 +148,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             }
 
             if(topThree.get(1).getTaskName().length() > 25){
-                String slimmedTaskNameAndDate = topThree.get(1).getTaskName().substring(0,24) + " : " + topThree.get(1).getTaskDate();
+                String slimmedTaskNameAndDate = topThree.get(1).getTaskName().substring(0,24) + "... : " + topThree.get(1).getTaskDate();
                 mTaskNumberTwo.setText(slimmedTaskNameAndDate);
             }else{
                 String taskNameAndDate = topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate();
@@ -156,7 +156,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
             }
 
             if(topThree.get(2).getTaskName().length() > 25){
-                String slimmedTaskNameAndDate = topThree.get(2).getTaskName().substring(0,24) + " : " + topThree.get(2).getTaskDate();
+                String slimmedTaskNameAndDate = topThree.get(2).getTaskName().substring(0,24) + "... : " + topThree.get(2).getTaskDate();
                 mTaskNumberThree.setText(slimmedTaskNameAndDate);
             }else{
                 String taskNameAndDate = topThree.get(2).getTaskName() + " : " + topThree.get(2).getTaskDate();

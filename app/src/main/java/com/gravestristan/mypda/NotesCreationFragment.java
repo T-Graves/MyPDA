@@ -17,10 +17,7 @@ import android.widget.EditText;
  */
 public class NotesCreationFragment extends Fragment implements AppStatics {
 
-    EditText mNoteTitle;
     EditText mNoteContent;
-
-    Button mCreateButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -32,19 +29,26 @@ public class NotesCreationFragment extends Fragment implements AppStatics {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_note_creation, container, false);
 
-        mNoteTitle = (EditText) view.findViewById(R.id.note_title_field);
         mNoteContent = (EditText) view.findViewById(R.id.note_content_field);
 
-        mCreateButton = (Button) view.findViewById(R.id.create_or_update_button);
+        return view;
+    }
 
-        mCreateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_save_note).setVisible(true);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getFragmentManager().popBackStack();
+                return true;
+            case R.id.action_save_note:
                 NoteObjects noteObject = new NoteObjects();
                 PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
 
-                noteObject.setNoteTitle(mNoteTitle.getText().toString());
                 noteObject.setNoteContents(mNoteContent.getText().toString());
 
                 dbHandler.addNote(noteObject);
@@ -54,22 +58,6 @@ public class NotesCreationFragment extends Fragment implements AppStatics {
                 Snackbar snackBar = Snackbar
                         .make(getView(), "Note Created", Snackbar.LENGTH_SHORT);
                 snackBar.show();
-            }
-        });
-
-        return view;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                getFragmentManager().popBackStack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

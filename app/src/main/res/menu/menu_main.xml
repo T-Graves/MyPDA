@@ -18,6 +18,13 @@
         android:visible="false" />
 
     <item
+        android:id="@+id/action_save_note"
+        android:title="Save"
+        demonav:showAsAction="always"
+        android:visible="false"
+        />
+
+    <item
         android:id="@+id/action_about"
         android:title="@string/action_about"
         app:showAsAction="never" />

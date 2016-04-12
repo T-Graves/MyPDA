@@ -20,31 +20,15 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp">
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Note name"
-                android:id="@+id/note_name"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Note content"
                 android:id="@+id/note_content"
-                android:layout_below="@+id/note_name"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

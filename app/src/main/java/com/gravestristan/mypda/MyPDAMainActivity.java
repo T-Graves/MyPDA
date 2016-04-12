@@ -3,7 +3,6 @@ package com.gravestristan.mypda;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;

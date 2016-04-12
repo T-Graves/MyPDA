@@ -19,13 +19,11 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
 
     public static class NoteItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        TextView noteTitle;
         TextView noteContent;
 
         public NoteItemHolder(View itemView){
             super(itemView);
 
-            noteTitle = (TextView) itemView.findViewById(R.id.note_name);
             noteContent = (TextView) itemView.findViewById(R.id.note_content);
 
             itemView.setOnClickListener(this);
@@ -71,7 +69,6 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
 
     @Override
     public void onBindViewHolder(NoteItemHolder holder, int position){
-        holder.noteTitle.setText(mNoteObjectsArray.get(position).getNoteTitle());
         holder.noteContent.setText(mNoteObjectsArray.get(position).getNoteContents());
     }
 
