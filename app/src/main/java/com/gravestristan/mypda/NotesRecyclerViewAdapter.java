@@ -15,8 +15,9 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
 
     private ArrayList<NoteObjects> mNoteObjectsArray;
     private static NoteClickListener noteClickListener;
+    private static NoteLongClickListener noteLongClickListener;
 
-    public static class NoteItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class NoteItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         TextView noteTitle;
         TextView noteContent;
@@ -28,6 +29,7 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
             noteContent = (TextView) itemView.findViewById(R.id.note_content);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -35,10 +37,20 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
             noteClickListener.onItemClick(getAdapterPosition(), v);
         }
 
+        @Override
+        public boolean onLongClick(View v){
+            noteLongClickListener.onItemLongClick(getAdapterPosition(), v);
+            return true;
+        }
+
     }
 
     public void setOnItemClickListener(NoteClickListener noteClickListener){
         this.noteClickListener = noteClickListener;
+    }
+
+    public void setOnItemLongClickListener(NoteLongClickListener noteLongClickListener){
+        this.noteLongClickListener = noteLongClickListener;
     }
 
     public NotesRecyclerViewAdapter(ArrayList<NoteObjects> dataSet) {
@@ -69,8 +81,12 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
     }
 
 
-    public interface NoteClickListener{
+    public interface NoteClickListener {
         public void onItemClick(int position, View v);
+    }
+
+    public interface NoteLongClickListener {
+        public void onItemLongClick(int position, View v);
     }
 
 }

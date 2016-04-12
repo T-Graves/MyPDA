@@ -3,12 +3,14 @@ package com.gravestristan.mypda;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  *
@@ -42,7 +44,13 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.action_about:
+                Toast.makeText(this, "About page coming later", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.gravestristan.mypda;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,6 +51,9 @@ public class NotesCreationFragment extends Fragment implements AppStatics {
                 dbHandler.close();
 
                 getFragmentManager().popBackStack();
+                Snackbar snackBar = Snackbar
+                        .make(getView(), "Note Created", Snackbar.LENGTH_SHORT);
+                snackBar.show();
             }
         });
 

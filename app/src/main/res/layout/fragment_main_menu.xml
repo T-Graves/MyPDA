@@ -62,18 +62,19 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/workouts_button"
-            android:id="@+id/workouts_button"
+            android:text="@string/general_button"
+            android:id="@+id/general_button"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/general_button"
-            android:id="@+id/general_button"
+            android:text="@string/workouts_button"
+            android:id="@+id/workouts_button"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 

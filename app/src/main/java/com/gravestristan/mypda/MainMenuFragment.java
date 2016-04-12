@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
  * Created by Tristan on 2/20/2016.
  */
 public class MainMenuFragment extends Fragment implements AppStatics{
+
+    ArrayList<ScheduleItems> topThree;
 
     TextView mTaskNumberOne;
     TextView mTaskNumberTwo;
@@ -50,29 +53,15 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
 
-        ArrayList<ScheduleItems> topThree = dbHandler.getThreeClosestTaskItems();
+        topThree = dbHandler.getThreeClosestTaskItems();
         dbHandler.close();
 
         mTaskNumberOne = (TextView) view.findViewById(R.id.schedule_item_one);
         mTaskNumberTwo = (TextView) view.findViewById(R.id.schedule_item_Two);
         mTaskNumberThree = (TextView) view.findViewById(R.id.schedule_item_Three);
-        if(topThree.size() == 1){
-            mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
-            mTaskNumberTwo.setText("");
-            mTaskNumberThree.setText("");
-        }else if(topThree.size() == 2){
-            mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
-            mTaskNumberTwo.setText(topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate());
-            mTaskNumberThree.setText("");
-        }else if(topThree.size() == 3){
-            mTaskNumberOne.setText(topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate());
-            mTaskNumberTwo.setText(topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate());
-            mTaskNumberThree.setText(topThree.get(2).getTaskName() + " : " + topThree.get(2).getTaskDate());
-        }else{
-            mTaskNumberOne.setText("");
-            mTaskNumberTwo.setText("You Have No Tasks Yet");
-            mTaskNumberThree.setText("");
-        }
+
+        // Populate top three schedule items list
+        topThreeHandler();
 
         mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
         mScheduleButton.setOnClickListener(new View.OnClickListener(){
@@ -121,6 +110,65 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         return view;
     }
 
+    public void topThreeHandler(){
+        if(topThree.size() == 1){
+            if(topThree.get(0).getTaskName().length() > 25){
+                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + " : " + topThree.get(0).getTaskDate();
+                mTaskNumberOne.setText(slimmedTaskNameAndDate);
+            }else{
+                String taskNameAndDate = topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate();
+                mTaskNumberOne.setText(taskNameAndDate);
+            }
+            mTaskNumberTwo.setText("");
+            mTaskNumberThree.setText("");
+        }else if(topThree.size() == 2){
+            if(topThree.get(0).getTaskName().length() > 25){
+                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + " : " + topThree.get(0).getTaskDate();
+                mTaskNumberOne.setText(slimmedTaskNameAndDate);
+            }else{
+                String taskNameAndDate = topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate();
+                mTaskNumberOne.setText(taskNameAndDate);
+            }
+
+            if(topThree.get(1).getTaskName().length() > 25){
+                String slimmedTaskNameAndDate = topThree.get(1).getTaskName().substring(0,24) + " : " + topThree.get(1).getTaskDate();
+                mTaskNumberTwo.setText(slimmedTaskNameAndDate);
+            }else{
+                String taskNameAndDate = topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate();
+                mTaskNumberTwo.setText(taskNameAndDate);
+            }
+            mTaskNumberThree.setText("");
+        }else if(topThree.size() == 3){
+            if(topThree.get(0).getTaskName().length() > 25){
+                String slimmedTaskNameAndDate = topThree.get(0).getTaskName().substring(0,24) + " : " + topThree.get(0).getTaskDate();
+                mTaskNumberOne.setText(slimmedTaskNameAndDate);
+            }else{
+                String taskNameAndDate = topThree.get(0).getTaskName() + " : " + topThree.get(0).getTaskDate();
+                mTaskNumberOne.setText(taskNameAndDate);
+            }
+
+            if(topThree.get(1).getTaskName().length() > 25){
+                String slimmedTaskNameAndDate = topThree.get(1).getTaskName().substring(0,24) + " : " + topThree.get(1).getTaskDate();
+                mTaskNumberTwo.setText(slimmedTaskNameAndDate);
+            }else{
+                String taskNameAndDate = topThree.get(1).getTaskName() + " : " + topThree.get(1).getTaskDate();
+                mTaskNumberTwo.setText(taskNameAndDate);
+            }
+
+            if(topThree.get(2).getTaskName().length() > 25){
+                String slimmedTaskNameAndDate = topThree.get(2).getTaskName().substring(0,24) + " : " + topThree.get(2).getTaskDate();
+                mTaskNumberThree.setText(slimmedTaskNameAndDate);
+            }else{
+                String taskNameAndDate = topThree.get(2).getTaskName() + " : " + topThree.get(2).getTaskDate();
+                mTaskNumberThree.setText(taskNameAndDate);
+            }
+        }else{
+            mTaskNumberOne.setText("");
+            mTaskNumberTwo.setText("You Have No Upcoming Tasks");
+            mTaskNumberThree.setText("");
+        }
+    }
+
     /**
      * This method is used to reduce redundant code. It takes in a new fragment and swaps it out
      * with the current fragment. it puts the current fragment on the backstack to be returned later.
@@ -138,7 +186,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
      */
     @Override
     public void onDestroy() {
-        Log.d(TAG, "main menu fragment destroyed");
+        //Log.d(TAG, "main menu fragment destroyed");
         super.onDestroy();
     }
 
@@ -147,7 +195,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
      */
     @Override
     public void onDetach() {
-        Log.d(TAG, "main menu fragment detached");
+        //Log.d(TAG, "main menu fragment detached");
         super.onDetach();
     }
 
@@ -156,7 +204,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
      */
     @Override
     public void onPause() {
-        Log.d(TAG, "main menu fragment paused");
+        //Log.d(TAG, "main menu fragment paused");
         super.onPause();
     }
 
@@ -165,7 +213,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
      */
     @Override
     public void onResume() {
-        Log.d(TAG, "main menu fragment resumed");
+        //Log.d(TAG, "main menu fragment resumed");
         super.onResume();
     }
 
@@ -174,7 +222,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
      */
     @Override
     public void onStart() {
-        Log.d(TAG, "main menu fragment started");
+        //Log.d(TAG, "main menu fragment started");
         super.onStart();
     }
 
@@ -183,7 +231,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
      */
     @Override
     public void onStop() {
-        Log.d(TAG, "main menu fragment stopped");
+        //Log.d(TAG, "main menu fragment stopped");
         super.onStop();
     }
 }

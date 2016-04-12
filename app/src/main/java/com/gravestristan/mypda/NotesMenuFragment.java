@@ -1,8 +1,11 @@
 package com.gravestristan.mypda;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -60,19 +63,58 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
         mNoteList.addItemDecoration(itemDecoration);
 
         ((NotesRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
-                        NotesRecyclerViewAdapter.NoteClickListener() {
-                            @Override
-                            public void onItemClick(int position, View v){
-                                SingleNoteFragment currentNote = new SingleNoteFragment();
-                                Bundle args = new Bundle();
-                                args.putString("currentNoteUUID", mNoteObjects.get(position).getNoteId().toString());
+                             NotesRecyclerViewAdapter.NoteClickListener() {
+                                 @Override
+                                 public void onItemClick(int position, View v) {
+                                     SingleNoteFragment currentNote = new SingleNoteFragment();
+                                     Bundle args = new Bundle();
+                                     args.putString("currentNoteUUID", mNoteObjects.get(position).getNoteId().toString());
 
-                                currentNote.setArguments(args);
-                                swapFragmentHandler(currentNote);
-                            }
-                        });
+                                     currentNote.setArguments(args);
+                                     swapFragmentHandler(currentNote);
+                                 }
+                             });
+
+        ((NotesRecyclerViewAdapter) mAdapter).setOnItemLongClickListener(new NotesRecyclerViewAdapter.NoteLongClickListener() {
+            @Override
+            public void onItemLongClick(int position, View v) {
+                //Log.d(TAG, "Note clicked long");
+                final int itemPosition = position;
+                final View view = v;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setCancelable(true);
+                builder.setTitle("Delete Note");
+                builder.setMessage("Delete This Note?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
+                        dbHandler.deleteNoteFromNoteTable(mNoteObjects.get(itemPosition));
+                        dbHandler.close();
+                        mNoteObjects.remove(itemPosition);
+                        ((NotesRecyclerViewAdapter) mAdapter).deleteitem(itemPosition);
+                        noteDeletedSnackBar(view);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
 
         return view;
+    }
+
+    public void noteDeletedSnackBar(View view){
+        Snackbar snackbar = Snackbar
+                .make(view, "Note Deleted", Snackbar.LENGTH_SHORT);
+
+        snackbar.show();
     }
 
     @Override
