@@ -4,6 +4,14 @@
     <string name="action_about">About MyPDA</string>
     <string name="action_new_task">Create New Task</string>
     <string name="action_new_note">Create New Note</string>
+    <string name="action_save_note">Save</string>
+
+    <string name="action_enable_notify">Enable Notifications</string>
+    <string name="action_disable_notify">Disable Notifications</string>
+
+    <string name="upcoming_schedule_items">You have upcoming schedule items</string>
+    <string name="upcoming_schedule_items_title">Upcoming Schedule Items</string>
+    <string name="upcoming_schedule_items_text">You have upcoming schedule items.</string>
 
     <string name="schedule_button">Schedule</string>
     <string name="notes_button">Notes</string>

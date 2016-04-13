@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -199,6 +200,41 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
         return returnArray;
     }
+
+    /**
+     *
+     * @return
+     */
+    public boolean checkForUpcomingTasks(){
+        String query = "SELECT * FROM " + TABLE_TASKS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
+
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+            while(cursor.getPosition() != cursor.getCount()){
+                try {
+                    Date date = dateFormat.parse(cursor.getString(3));
+                    if(date.equals(dateFormat.parse(currentDate))){
+                        cursor.close();
+                        db.close();
+                        return true;
+                    }
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        db.close();
+
+        return false;
+    }
+
     //Scheduling function database control ends here
 
     //Notes function database control starts here
@@ -212,6 +248,11 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         db.execSQL("DELETE FROM " + TABLE_NOTES + " WHERE " + NOTES_COLUMN_UUID + " = '" + noteObject.getNoteId() + "'");
     }
 
+    /**
+     *
+     * @param currentUUID
+     * @return
+     */
     public NoteObjects getNote(UUID currentUUID){
         NoteObjects noteObject = new NoteObjects();
         String query = "SELECT * FROM " + TABLE_NOTES + " WHERE " + NOTES_COLUMN_UUID + " = '" + currentUUID + "'";

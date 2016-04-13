@@ -29,6 +29,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_pdamain);
 
+        ScheduleNotificationService.setServiceAlarm(this, true);
 
         mScheduleItems = PDASingleton.get(getApplicationContext()).getScheduleItems();
         if(mScheduleItems.isEmpty()){
@@ -62,6 +63,9 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
         });
     }
 
+    /**
+     *
+     */
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();

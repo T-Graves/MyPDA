@@ -27,16 +27,16 @@ import java.util.Locale;
  */
 public class ScheduleItemsCreationFragment extends Fragment implements AppStatics {
 
-    ArrayList<ScheduleItems> mScheduleItems;
+    private ArrayList<ScheduleItems> mScheduleItems;
 
-    EditText mTaskName;
-    EditText mTaskDate;
-    EditText mTaskNote;
+    private EditText mTaskName;
+    private EditText mTaskDate;
+    private EditText mTaskNote;
 
-    Button mCreateButton;
+    private Button mCreateButton;
 
-    Calendar myCalendar = Calendar.getInstance();
-    DatePickerDialog.OnDateSetListener date;
+    private Calendar myCalendar = Calendar.getInstance();
+    private DatePickerDialog.OnDateSetListener date;
 
     /**
      *
@@ -46,6 +46,7 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
 
         mScheduleItems = PDASingleton.get(getActivity()).getScheduleItems();
     }
@@ -109,6 +110,8 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
                 mScheduleItems.add(newItem);
                 dbHandler.addTask(newItem);
                 dbHandler.close();
+
+
                 getFragmentManager().popBackStack();
                 Snackbar snackBar = Snackbar
                         .make(getView(), "Schedule Item Created", Snackbar.LENGTH_SHORT);

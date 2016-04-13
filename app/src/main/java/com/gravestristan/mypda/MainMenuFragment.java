@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -110,6 +109,9 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         return view;
     }
 
+    /**
+     *
+     */
     public void topThreeHandler(){
         if(topThree.size() == 1){
             if(topThree.get(0).getTaskName().length() > 25){

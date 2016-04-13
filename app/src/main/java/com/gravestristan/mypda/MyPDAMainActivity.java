@@ -2,6 +2,7 @@ package com.gravestristan.mypda;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +39,23 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
 
     /**
      *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem toggleNotifications = menu.findItem(R.id.action_toggle_notifications);
+        if(ScheduleNotificationService.isServiceAlarmOn(this)){
+            toggleNotifications.setTitle(R.string.action_disable_notify);
+        }else{
+            toggleNotifications.setTitle(R.string.action_enable_notify);
+        }
+        return true;
+    }
+
+    /**
+     *
      * @param item
      * @return
      */
@@ -46,6 +64,15 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
         switch (item.getItemId()){
             case R.id.action_about:
                 Toast.makeText(this, "About page coming later", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_toggle_notifications:
+                Boolean shouldStartAlarm = !ScheduleNotificationService.isServiceAlarmOn(this);
+                ScheduleNotificationService.setServiceAlarm(this, shouldStartAlarm);
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+                    this.invalidateOptionsMenu();
+                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

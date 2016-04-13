@@ -24,12 +24,23 @@ public class SingleNoteFragment extends Fragment implements AppStatics{
 
     private UUID mCurrentUUID;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_note_creation, container, false);
@@ -45,11 +56,20 @@ public class SingleNoteFragment extends Fragment implements AppStatics{
         return view;
     }
 
+    /**
+     *
+     * @param menu
+     */
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_save_note).setVisible(true);
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -64,6 +84,9 @@ public class SingleNoteFragment extends Fragment implements AppStatics{
         }
     }
 
+    /**
+     *
+     */
     private void saveNote(){
         NoteObjects noteObject = new NoteObjects();
         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
