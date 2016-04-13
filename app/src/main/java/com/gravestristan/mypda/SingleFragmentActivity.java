@@ -1,6 +1,8 @@
 package com.gravestristan.mypda;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +31,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_pdamain);
 
-        ScheduleNotificationService.setServiceAlarm(this, true);
+        loadSavedPreferences();
 
         mScheduleItems = PDASingleton.get(getApplicationContext()).getScheduleItems();
         if(mScheduleItems.isEmpty()){
@@ -61,6 +63,16 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
             }
 
         });
+    }
+
+    private void loadSavedPreferences(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean notificationIsOn = sharedPreferences.getBoolean("notify", true);
+        if(notificationIsOn){
+            ScheduleNotificationService.setServiceAlarm(this, notificationIsOn);
+        }else{
+            ScheduleNotificationService.setServiceAlarm(this, notificationIsOn);
+        }
     }
 
     /**

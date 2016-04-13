@@ -1,8 +1,10 @@
 package com.gravestristan.mypda;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -68,6 +70,11 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
             case R.id.action_toggle_notifications:
                 Boolean shouldStartAlarm = !ScheduleNotificationService.isServiceAlarmOn(this);
                 ScheduleNotificationService.setServiceAlarm(this, shouldStartAlarm);
+                SharedPreferences sharedPreferences = PreferenceManager
+                        .getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("notify", shouldStartAlarm);
+                editor.commit();
 
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
                     this.invalidateOptionsMenu();
