@@ -110,6 +110,10 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
         return view;
     }
 
+    /**
+     *
+     * @param view
+     */
     public void itemDeletedSnackBar(View view){
         Snackbar snackbar = Snackbar
                 .make(view, "Schedule Item Deleted", Snackbar.LENGTH_SHORT);

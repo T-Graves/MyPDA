@@ -21,26 +21,29 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
     ArrayList<ScheduleItems> mScheduleItems;
 
+    // Database name and table names
     private static final String DATABASE_NAME = "pdaDB.db";
     private static final String TABLE_TASKS = "tasks";
     private static final String TABLE_NOTES = "notes";
 
+    // Columns for the task table
     private static final String TASKS_COLUMN_ID = "_id";
     private static final String TASKS_COLUMN_UUID = "task_uuid";
     private static final String TASKS_COLUMN_TASKNAME = "task_name";
     private static final String TASKS_COLUMN_TASKDATE = "task_date";
     private static final String TASKS_COLUMN_TASKNOTE = "task_note";
 
+    // Columns for the notes table
     private static final String NOTES_COLUMN_ID = "_id";
     private static final String NOTES_COLUMN_UUID = "task_uuid";
     private static final String NOTES_COLUMN_NOTECONTENTS = "note_contents";
 
     /**
-     *
-     * @param context
-     * @param name
-     * @param factory
-     * @param version
+     * The constructor for the PDADBHandler class.
+     * @param context The app context being passed in.
+     * @param name The name being passed in.
+     * @param factory The cursor factory being passed in.
+     * @param version The database version being passed in.
      */
     public PDADBHandler(Context context, String name,
                         SQLiteDatabase.CursorFactory factory, int version){
@@ -49,8 +52,10 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
-     * @param db
+     * The onCreate method for PDADBHandler. Creates the tables to be used any time it is called
+     * which should only be when the database is first created or when the database version is
+     * changed.
+     * @param db The database being passed in.
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -71,7 +76,8 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
+     * The onUpgrade method for PDADBHandler. It drops any tables in the database and calles the
+     * onCreate method to recreate them. It will only be run if the database verison is changed.
      * @param db
      * @param oldVersion
      * @param newVersion
@@ -86,17 +92,20 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     //Scheduling function database control starts here
 
     /**
-     *
-     * @param scheduleItem
+     * This method deletes a task from the tasks table. The item to delete is determined by the
+     * UUID of an object that is passed in.
+     * @param scheduleItem The task item to delete.
      */
     public void deleteItemFromTaskTable(ScheduleItems scheduleItem){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_TASKS + " WHERE " + TASKS_COLUMN_UUID + " = '" + scheduleItem.getTaskId() + "'");
+        db.close();
     }
 
     /**
-     *
-     * @param scheduleItem
+     * This method adds a task into the tasks table. All the info to store is taken out of an
+     * object that is passed in.
+     * @param scheduleItem The task item to add.
      */
     public void addTask(ScheduleItems scheduleItem){
         ContentValues values = new ContentValues();
@@ -113,8 +122,9 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
-     * @param scheduleItem
+     * This method updates a task that is already in the tasks table. Which item to update is
+     * determined by the UUID of an object that is passed in.
+     * @param scheduleItem The task item to update.
      */
     public void updateTask(ScheduleItems scheduleItem){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -132,7 +142,8 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
+     * This method gets all tasks from the tasks table. It stores each rows data into a new
+     * ScheduleItem object and stores that object in the PDASingletons ArrayList for ScheduleItems.
      */
     public void getAllTaskItems(){
         String query = "SELECT * FROM " + TABLE_TASKS;
@@ -156,7 +167,10 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
+     * This method finds all tasks ordered by date. It then grabs the top three items and stores
+     * them as ScheduleItems objects and puts those into an ArrayList. the array list is then
+     * returned.
+     * @return
      */
     public ArrayList getThreeClosestTaskItems(){
         ArrayList<ScheduleItems> returnArray = new ArrayList<ScheduleItems>();

@@ -16,14 +16,16 @@ import java.util.ArrayList;
  *
  * Created by Tristan on 2/20/2016.
  */
-public abstract class SingleFragmentActivity extends AppCompatActivity implements AppStatics{
+public abstract class FragmentActivityStarter extends AppCompatActivity implements AppStatics{
 
     ArrayList<ScheduleItems> mScheduleItems;
 
     protected abstract Fragment createFragment();
 
     /**
-     *
+     * This is the onCreate method for the apps main activity. It is moved into a separate class
+     * to make the MyPDAMainActivity cleaner. This method will load any saved preferences and it
+     * will display the first fragment that the app uses.
      * @param savedInstanceState
      */
     @Override
@@ -65,6 +67,9 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
         });
     }
 
+    /**
+     * This method loads saved preferences when called.
+     */
     private void loadSavedPreferences(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean notificationIsOn = sharedPreferences.getBoolean("notify", true);
@@ -76,7 +81,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
     }
 
     /**
-     *
+     * This method makes sure the home and up buttons are still displayed when a fragment is
+     * resumed after rotation.
      */
     @Override
     protected void onResumeFragments() {

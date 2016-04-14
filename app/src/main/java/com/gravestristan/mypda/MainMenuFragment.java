@@ -3,7 +3,6 @@ package com.gravestristan.mypda;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +30,8 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     Button mGeneralButton;
 
     /**
-     *
-     * @param savedInstanceState
+     * The onCreate method for the main menu fragment. Nothing is done here.
+     * @param savedInstanceState The savedInstanceState to be used.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +39,12 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     }
 
     /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * The onCreateView method for the main menu fragment. All the navigation button click listeners
+     * are set up here.
+     * @param inflater The layout inflater being passed in.
+     * @param container The view group being passed in.
+     * @param savedInstanceState The bundle being passed in.
+     * @return The inflated view is returned when this method is finished.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,7 +66,6 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mScheduleButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d(TAG, "Schedule button clicked");
                 ScheduleItemsMenuFragment scheduleItems = new ScheduleItemsMenuFragment();
 
                 swapFragmentHandler(scheduleItems);
@@ -77,7 +76,6 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mNotesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d(TAG, "Notes button clicked");
                 NotesMenuFragment notesMenu = new NotesMenuFragment();
 
                 swapFragmentHandler(notesMenu);
@@ -88,7 +86,6 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mWorkoutsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d(TAG, "Workouts button clicked");
                 WorkoutsMenuFragment workoutsMenu = new WorkoutsMenuFragment();
 
                 swapFragmentHandler(workoutsMenu);
@@ -99,7 +96,6 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mGeneralButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "General button clicked");
                 GeneralsMenuFragment generalsMenu = new GeneralsMenuFragment();
 
                 swapFragmentHandler(generalsMenu);
@@ -110,7 +106,8 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     }
 
     /**
-     *
+     * This method handles populating the top three section with text. It has been moved out into a
+     * separate method to keep the onCreateView method a little more clean.
      */
     public void topThreeHandler(){
         if(topThree.size() == 1){
@@ -181,59 +178,5 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         transaction.replace(R.id.fragmentContainer, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void onDestroy() {
-        //Log.d(TAG, "main menu fragment destroyed");
-        super.onDestroy();
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void onDetach() {
-        //Log.d(TAG, "main menu fragment detached");
-        super.onDetach();
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void onPause() {
-        //Log.d(TAG, "main menu fragment paused");
-        super.onPause();
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void onResume() {
-        //Log.d(TAG, "main menu fragment resumed");
-        super.onResume();
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void onStart() {
-        //Log.d(TAG, "main menu fragment started");
-        super.onStart();
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void onStop() {
-        //Log.d(TAG, "main menu fragment stopped");
-        super.onStop();
     }
 }

@@ -15,13 +15,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- *
+ * The activity that first runs and holds all other fragments used in the app.
+ * This class extends FragmentActivityStarter
  */
-public class MyPDAMainActivity extends SingleFragmentActivity implements AppStatics{
+public class MyPDAMainActivity extends FragmentActivityStarter implements AppStatics{
 
     /**
-     *
-     * @return
+     * This method returns a new MainMenuFragment which creates the main fragment that is used.
+     * @return The MainMenuFragment.
      */
     @Override
     protected Fragment createFragment(){
@@ -29,7 +30,7 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
     }
 
     /**
-     *
+     * This method inflates the main menu for the app.
      * @param menu
      * @return
      */
@@ -40,7 +41,8 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
     }
 
     /**
-     *
+     * This method toggles the text of the toggleNotifications action depending on a preference
+     * saved by the user.
      * @param menu
      * @return
      */
@@ -57,7 +59,7 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
     }
 
     /**
-     *
+     * This method handles what to do when an option is pressed.
      * @param item
      * @return
      */
@@ -87,7 +89,7 @@ public class MyPDAMainActivity extends SingleFragmentActivity implements AppStat
     }
 
     /**
-     *
+     * This method is used to hide the keyboard when the user clicks out of an edit text view.
      * @param event
      * @return
      */

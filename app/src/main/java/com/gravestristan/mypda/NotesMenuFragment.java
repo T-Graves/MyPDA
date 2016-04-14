@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 /**
+ * This class is the main notes menu. It displays all notes that the user currently has.
  * Created by Tristan on 3/1/2016.
  */
 public class NotesMenuFragment extends Fragment implements AppStatics{
@@ -29,7 +30,8 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
     private RecyclerView.LayoutManager mLayoutManager;
 
     /**
-     *
+     * The onCreate method for the NotesMenuFragment. It makes sure this fragment has the options
+     * menu.
      * @param savedInstanceState
      */
     @Override
@@ -39,7 +41,8 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
     }
 
     /**
-     *
+     * The onCreateView method for the NotesMenuFragment. It inflates the view and strings up all
+     * view items.
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -109,6 +112,10 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
         return view;
     }
 
+    /**
+     * This method displays a SnackBar message when an item is deleted.
+     * @param view
+     */
     public void noteDeletedSnackBar(View view){
         Snackbar snackbar = Snackbar
                 .make(view, "Note Deleted", Snackbar.LENGTH_SHORT);
@@ -116,23 +123,17 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
         snackbar.show();
     }
 
+    /**
+     * This method sets the new note menu item to be visible.
+     * @param menu
+     */
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_new_note).setVisible(true);
     }
 
     /**
-     *
-     * @param menu
-     * @param inflater
-     */
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    /**
-     *
+     * This method handles what to do when a menu item is clicked.
      * @param item
      * @return
      */
@@ -153,8 +154,9 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
     }
 
     /**
-     *
-     * @param newFragment
+     * This method is used to swap fragments. It is out in its own method to clean up the code a
+     * little bit.
+     * @param newFragment The fragment to swap to.
      */
     private void swapFragmentHandler(Fragment newFragment){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
