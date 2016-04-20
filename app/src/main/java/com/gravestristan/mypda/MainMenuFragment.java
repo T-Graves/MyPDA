@@ -3,6 +3,7 @@ package com.gravestristan.mypda;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,21 @@ import java.util.ArrayList;
  */
 public class MainMenuFragment extends Fragment implements AppStatics{
 
-    ArrayList<ScheduleItems> topThree;
+    private ArrayList<ScheduleItems> topThree;
 
-    TextView mTaskNumberOne;
-    TextView mTaskNumberTwo;
-    TextView mTaskNumberThree;
+    private TextView mTaskNumberOne;
+    private TextView mTaskNumberTwo;
+    private TextView mTaskNumberThree;
 
-    Button mScheduleButton;
-    Button mNotesButton;
-    Button mWorkoutsButton;
-    Button mGeneralButton;
+    private Button mScheduleButton;
+    private Button mNotesButton;
+    private Button mWorkoutsButton;
+    private Button mCalculatorsButton;
+
+    private CalculatorsMenuFragment calculatorsMenu;
+    private WorkoutsMenuFragment workoutsMenu;
+    private NotesMenuFragment notesMenu;
+    private ScheduleItemsMenuFragment scheduleItems;
 
     /**
      * The onCreate method for the main menu fragment. Nothing is done here.
@@ -66,7 +72,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mScheduleButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                ScheduleItemsMenuFragment scheduleItems = new ScheduleItemsMenuFragment();
+                scheduleItems = new ScheduleItemsMenuFragment();
 
                 swapFragmentHandler(scheduleItems);
             }
@@ -76,7 +82,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mNotesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                NotesMenuFragment notesMenu = new NotesMenuFragment();
+                notesMenu = new NotesMenuFragment();
 
                 swapFragmentHandler(notesMenu);
             }
@@ -86,19 +92,19 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mWorkoutsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                WorkoutsMenuFragment workoutsMenu = new WorkoutsMenuFragment();
+                workoutsMenu = new WorkoutsMenuFragment();
 
                 swapFragmentHandler(workoutsMenu);
             }
         });
 
-        mGeneralButton = (Button) view.findViewById(R.id.general_button);
-        mGeneralButton.setOnClickListener(new View.OnClickListener() {
+        mCalculatorsButton = (Button) view.findViewById(R.id.calculators_button);
+        mCalculatorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GeneralsMenuFragment generalsMenu = new GeneralsMenuFragment();
+                calculatorsMenu = new CalculatorsMenuFragment();
 
-                swapFragmentHandler(generalsMenu);
+                swapFragmentHandler(calculatorsMenu);
             }
         });
 

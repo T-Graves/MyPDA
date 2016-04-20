@@ -16,5 +16,5 @@
     <string name="schedule_button">Schedule</string>
     <string name="notes_button">Notes</string>
     <string name="workouts_button">Workouts</string>
-    <string name="general_button">General</string>
+    <string name="calculators_button">Calculators</string>
 </resources>

@@ -62,8 +62,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/general_button"
-            android:id="@+id/general_button"
+            android:text="@string/calculators_button"
+            android:id="@+id/calculators_button"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 
