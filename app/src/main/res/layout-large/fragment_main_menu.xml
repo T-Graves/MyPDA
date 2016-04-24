@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="A"
+            android:id="@+id/schedule_item_one"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="A"
+            android:id="@+id/schedule_item_Two"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="A"
+            android:id="@+id/schedule_item_Three"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/schedule_button"
+            android:id="@+id/schedule_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="25sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/notes_button"
+            android:id="@+id/notes_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="25sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/calculators_button"
+            android:id="@+id/calculators_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="25sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/workouts_button"
+            android:id="@+id/workouts_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:visibility="invisible"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
