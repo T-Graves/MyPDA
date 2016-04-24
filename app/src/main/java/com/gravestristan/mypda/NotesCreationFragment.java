@@ -66,25 +66,33 @@ public class NotesCreationFragment extends Fragment implements AppStatics {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                getFragmentManager().popBackStack();
+                if(mNoteContent.getText() != null && !mNoteContent.getText().toString().equals("")){
+                    saveNote();
+                }else{
+                    getFragmentManager().popBackStack();
+                }
                 return true;
             case R.id.action_save_note:
-                NoteObjects noteObject = new NoteObjects();
-                PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
-
-                noteObject.setNoteContents(mNoteContent.getText().toString());
-
-                dbHandler.addNote(noteObject);
-                dbHandler.close();
-
-                getFragmentManager().popBackStack();
-                Snackbar snackBar = Snackbar
-                        .make(getView(), "Note Created", Snackbar.LENGTH_SHORT);
-                snackBar.show();
+                saveNote();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void saveNote(){
+        NoteObjects noteObject = new NoteObjects();
+        PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
+
+        noteObject.setNoteContents(mNoteContent.getText().toString());
+
+        dbHandler.addNote(noteObject);
+        dbHandler.close();
+
+        getFragmentManager().popBackStack();
+        Snackbar snackBar = Snackbar
+                .make(getView(), "Note Created", Snackbar.LENGTH_SHORT);
+        snackBar.show();
     }
 
 }

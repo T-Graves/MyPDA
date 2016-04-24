@@ -3,51 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollView"
-    android:layout_gravity="center_horizontal" >
+    android:id="@+id/scrollView2"
+    android:layout_gravity="center_horizontal">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1">
 
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/editText" />
-
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
             <Button
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:text="7"
-                android:id="@+id/button" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clear"
+                android:id="@+id/button17" />
 
-            <Button
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:text="8"
-                android:id="@+id/button2" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:layout_weight="1" />
 
-            <Button
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:text="9"
-                android:id="@+id/button3" />
-
-            <Button
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:text="/"
-                android:id="@+id/button4" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,25 +39,57 @@
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
+                android:text="7"
+                android:id="@+id/button" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="45dp"
+                android:text="8"
+                android:id="@+id/button2" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="45dp"
+                android:text="9"
+                android:id="@+id/button3" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="45dp"
+                android:text="/"
+                android:id="@+id/button4" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="45dp"
                 android:text="4"
                 android:id="@+id/button5" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="5"
                 android:id="@+id/button6" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="6"
                 android:id="@+id/button7" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="*"
                 android:id="@+id/button8" />
         </LinearLayout>
@@ -89,25 +102,25 @@
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="1"
                 android:id="@+id/button9" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="2"
                 android:id="@+id/button10" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="3"
                 android:id="@+id/button11" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="-"
                 android:id="@+id/button12" />
         </LinearLayout>
@@ -120,35 +133,29 @@
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="."
                 android:id="@+id/button13" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="0"
                 android:id="@+id/button14" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="="
                 android:id="@+id/button15" />
 
             <Button
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="45dp"
                 android:text="+"
                 android:id="@+id/button16" />
         </LinearLayout>
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:text="Clear"
-            android:id="@+id/button18"
-            android:layout_gravity="center_horizontal" />
-
     </LinearLayout>
+
 </ScrollView>
