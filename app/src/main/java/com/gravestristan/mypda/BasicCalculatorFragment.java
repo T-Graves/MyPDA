@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Tristan on 4/19/2016.
  */
-public class BasicCalculatorFragment extends Fragment implements AppStatics {
+public class BasicCalculatorFragment extends Fragment implements AppStatics, View.OnClickListener {
 
     private Button mNum0;
     private Button mNum1;
@@ -28,27 +30,31 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics {
     private Button mSub;
     private Button mMulti;
     private Button mDiv;
+    private Button mToggleSign;
+    private Button mInvert;
 
     private Button mDot;
     private Button mEquals;
 
     private Button mClear;
 
-    private EditText mCalcScreen;
     private EditText mCurrentResultScreen;
 
-    private Double val1;
-    private Double val2;
-    private Double result;
+    private Boolean userIsInTheMiddleOfTypingANumber = false;
+    private CalculatorBrains mCalcBrains;
+    private static final String DIGITS = "0123456789.";
 
-    private boolean add, sub, multi, div = false;
-    private boolean operationEnd = false;
-    private boolean operationError = false;
+    DecimalFormat df = new DecimalFormat("@############");
 
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        mCalcBrains = new CalculatorBrains();
+        df.setMinimumFractionDigits(0);
+        df.setMinimumIntegerDigits(1);
+        df.setMaximumIntegerDigits(8);
     }
 
     @Override
@@ -70,338 +76,68 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics {
         mSub = (Button) view.findViewById(R.id.sub);
         mMulti = (Button) view.findViewById(R.id.multi);
         mDiv = (Button) view.findViewById(R.id.div);
+        mToggleSign = (Button) view.findViewById(R.id.toggle_sign);
+        mInvert = (Button) view.findViewById(R.id.invert);
 
         mDot = (Button) view.findViewById(R.id.dot);
         mEquals = (Button) view.findViewById(R.id.equals);
 
         mClear = (Button) view.findViewById(R.id.clear);
 
-        mCalcScreen = (EditText) view.findViewById(R.id.calc_screen);
         mCurrentResultScreen = (EditText) view.findViewById(R.id.current_result_screen);
 
-        mCurrentResultScreen.setText("0");
+        mNum0.setOnClickListener(this);
+        mNum1.setOnClickListener(this);
+        mNum2.setOnClickListener(this);
+        mNum3.setOnClickListener(this);
+        mNum4.setOnClickListener(this);
+        mNum5.setOnClickListener(this);
+        mNum6.setOnClickListener(this);
+        mNum7.setOnClickListener(this);
+        mNum8.setOnClickListener(this);
+        mNum9.setOnClickListener(this);
+        mDot.setOnClickListener(this);
 
-        mNum0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCurrentResultScreen.getText().toString().equals("0")){
-                    mCurrentResultScreen.setText("0");
-                }else{
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "0");
-                }
-            }
-        });
-        mNum1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCurrentResultScreen.getText().toString().equals("0")) {
-                    mCurrentResultScreen.setText("1");
-                } else {
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "1");
-                }
-            }
-        });
-        mNum2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCurrentResultScreen.getText().toString().equals("0")) {
-                    mCurrentResultScreen.setText("2");
-                } else {
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "2");
-                }
-            }
-        });
-        mNum3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCurrentResultScreen.getText().toString().equals("0")) {
-                    mCurrentResultScreen.setText("3");
-                } else {
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "3");
-                }
-            }
-        });
-        mNum4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCurrentResultScreen.getText().toString().equals("0")) {
-                    mCurrentResultScreen.setText("4");
-                } else {
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "4");
-                }
-            }
-        });
-        mNum5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCurrentResultScreen.getText().toString().equals("0")) {
-                    mCurrentResultScreen.setText("5");
-                } else {
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "5");
-                }
-            }
-        });
-        mNum6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCurrentResultScreen.getText().toString().equals("0")){
-                    mCurrentResultScreen.setText("6");
-                }else{
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "6");
-                }
-            }
-        });
-        mNum7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCurrentResultScreen.getText().toString().equals("0")){
-                    mCurrentResultScreen.setText("7");
-                }else{
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "7");
-                }
-            }
-        });
-        mNum8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCurrentResultScreen.getText().toString().equals("0")){
-                    mCurrentResultScreen.setText("8");
-                }else{
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "8");
-                }
-            }
-        });
-        mNum9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCurrentResultScreen.getText().toString().equals("0")){
-                    mCurrentResultScreen.setText("9");
-                }else{
-                    mCurrentResultScreen.setText(mCurrentResultScreen.getText() + "9");
-                }
-            }
-        });
-        mDot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCurrentResultScreen.setText(mCurrentResultScreen.getText() + ".");
-            }
-        });
+        mAdd.setOnClickListener(this);
+        mSub.setOnClickListener(this);
+        mMulti.setOnClickListener(this);
+        mDiv.setOnClickListener(this);
+        mToggleSign.setOnClickListener(this);
+        mInvert.setOnClickListener(this);
 
-
-        mAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(operationEnd){
-                    if(result != null){
-                        val1 = result;
-                    }else{
-                        val1 = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    }
-
-                    mCalcScreen.setText(val1 + " + ");
-
-                    result = null;
-                    operationEnd = false;
-                }else{
-                    Double valTemp = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    if(val1 != null){
-                        val1 = val1 + valTemp;
-                    }else{
-                        val1 = valTemp;
-                    }
-
-                    if(mCalcScreen.getText() == null){
-                        mCalcScreen.setText(val1 + " + ");
-                    }else{
-                        mCalcScreen.setText(mCalcScreen.getText().toString() + valTemp + " + ");
-                    }
-
-                }
-
-                add = true;
-                sub = false;
-                multi = false;
-                div = false;
-                mCurrentResultScreen.setText("0");
-            }
-        });
-        mSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(operationEnd){
-                    if(result != null){
-                        val1 = result;
-                    }else{
-                        val1 = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    }
-
-                    mCalcScreen.setText(val1 + " - ");
-
-                    result = null;
-                    operationEnd = false;
-                }else{
-                    Double valTemp = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    if(val1 != null){
-                        val1 = val1 - valTemp;
-                    }else{
-                        val1 = valTemp;
-                    }
-
-                    if(mCalcScreen.getText() == null){
-                        mCalcScreen.setText(val1 + " - ");
-                    }else{
-                        mCalcScreen.setText(mCalcScreen.getText().toString() + valTemp + " - ");
-                    }
-                }
-
-                add = false;
-                sub = true;
-                multi = false;
-                div = false;
-                mCurrentResultScreen.setText("0");
-            }
-        });
-        mMulti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(operationEnd){
-                    if(result != null){
-                        val1 = result;
-                    }else{
-                        val1 = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    }
-
-                    mCalcScreen.setText(val1 + " * ");
-
-                    result = null;
-                    operationEnd = false;
-                }else{
-                    Double valTemp = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    if(val1 != null){
-                        val1 = val1 * valTemp;
-                    }else{
-                        val1 = valTemp;
-                    }
-
-                    if(mCalcScreen.getText() == null){
-                        mCalcScreen.setText(val1 + " * ");
-                    }else{
-                        mCalcScreen.setText(mCalcScreen.getText().toString() + valTemp + " * ");
-                    }
-                }
-
-                add = false;
-                sub = false;
-                multi = true;
-                div = false;
-                mCurrentResultScreen.setText("0");
-            }
-        });
-        mDiv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(operationEnd){
-                    if(result != null){
-                        val1 = result;
-                    }else{
-                        val1 = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    }
-
-                    mCalcScreen.setText(val1 + " / ");
-
-                    result = null;
-                    operationEnd = false;
-                }else{
-                    if(!operationError){
-                        Double valTemp = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                        if(val1 != null){
-                            val1 = val1 / valTemp;
-                        }else{
-                            val1 = valTemp;
-                        }
-                        if(mCalcScreen.getText() == null){
-                            mCalcScreen.setText(val1 + " / ");
-                        }else{
-                            mCalcScreen.setText(mCalcScreen.getText().toString() + valTemp + " / ");
-                        }
-                    }
-                }
-
-                add = false;
-                sub = false;
-                multi = false;
-                div = true;
-                mCurrentResultScreen.setText("0");
-            }
-        });
-
-        mEquals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(val1 != null){
-                    val2 = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    if(add){
-                        result = val1 + val2;
-                        mCurrentResultScreen.setText(result + "");
-                        mCalcScreen.setText(mCalcScreen.getText().toString() + val2);
-                        add = false;
-                    }
-                    if(sub){
-                        result = val1 - val2;
-                        mCurrentResultScreen.setText(result + "");
-                        mCalcScreen.setText(mCalcScreen.getText().toString() + val2);
-                        sub = false;
-                    }
-                    if(multi){
-                        result = val1 * val2;
-                        mCurrentResultScreen.setText(result + "");
-                        mCalcScreen.setText(mCalcScreen.getText().toString() + val2);
-                        multi = false;
-                    }
-                    if(div){
-                        if(val2 == 0.0){
-                            operationError = true;
-                            mCurrentResultScreen.setText("cannot divide by 0");
-                            return;
-                        }else{
-                            result = val1 / val2;
-                            mCurrentResultScreen.setText(result + "");
-                            mCalcScreen.setText(mCalcScreen.getText().toString() + val2);
-                        }
-                        div = false;
-                    }
-                    operationEnd = true;
-                }else{
-                    val1 = Double.parseDouble(mCurrentResultScreen.getText().toString());
-                    if(val1 == 0.0){
-                        mCurrentResultScreen.setText("0");
-                    }else{
-                        mCurrentResultScreen.setText(val1 + "");
-                    }
-                    operationEnd = true;
-                }
-            }
-        });
-        mClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCurrentResultScreen.setText("0");
-                mCalcScreen.setText(null);
-                add = false;
-                sub = false;
-                multi = false;
-                div = false;
-                operationEnd = false;
-                operationError = false;
-
-                val1 = null;
-                val2 = null;
-                result = null;
-            }
-        });
+        mEquals.setOnClickListener(this);
+        mClear.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v){
+        String buttonPressed = ((Button) v).getText().toString();
+
+        if (DIGITS.contains(buttonPressed)) {
+            if (userIsInTheMiddleOfTypingANumber) {
+                if (buttonPressed.equals(".") && mCurrentResultScreen.getText().toString().contains(".")) {
+
+                }else{
+                    mCurrentResultScreen.append(buttonPressed);
+                }
+            } else {
+                if (buttonPressed.equals(".")) {
+                    mCurrentResultScreen.setText(0 + buttonPressed);
+                } else {
+                    mCurrentResultScreen.setText(buttonPressed);
+                }
+
+                userIsInTheMiddleOfTypingANumber = true;
+            }
+        } else {
+            if (userIsInTheMiddleOfTypingANumber) {
+                mCalcBrains.setOperand(Double.parseDouble(mCurrentResultScreen.getText().toString()));
+                userIsInTheMiddleOfTypingANumber = false;
+            }
+            mCalcBrains.performOperation(buttonPressed);
+            mCurrentResultScreen.setText(df.format(mCalcBrains.getResult()));
+        }
     }
 }

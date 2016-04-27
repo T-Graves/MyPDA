@@ -15,15 +15,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:id="@+id/calc_screen"
-            android:focusable="false"
-            android:background="#c7c9c5"
-            android:textColor="#000000"
-            android:gravity="bottom|end" />
-        <EditText
-            android:layout_marginTop="1dp"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
             android:id="@+id/current_result_screen"
             android:focusable="false"
             android:background="#c7c9c5"
@@ -144,8 +135,8 @@
             <Button
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:text="="
-                android:id="@+id/equals" />
+                android:text="+/-"
+                android:id="@+id/toggle_sign" />
 
             <Button
                 android:layout_width="75dp"
@@ -154,12 +145,32 @@
                 android:id="@+id/add" />
         </LinearLayout>
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:text="Clear"
-            android:id="@+id/clear"
-            android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:text="1/x"
+                android:id="@+id/invert" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:text="CLEAR"
+                android:id="@+id/clear" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:text="="
+                android:id="@+id/equals" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 </ScrollView>
