@@ -35,6 +35,9 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     private NotesMenuFragment notesMenu;
     private ScheduleItemsMenuFragment scheduleItems;
 
+    // this will probably stay but its being used for testing right now
+    private ScheduleCalendar scheduleCalendar;
+
     /**
      * The onCreate method for the main menu fragment. Nothing is done here.
      * @param savedInstanceState The savedInstanceState to be used.
@@ -72,9 +75,13 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mScheduleButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                scheduleItems = new ScheduleItemsMenuFragment();
+                //this button is changed for testing. i'll probably fix the stuff later
 
-                swapFragmentHandler(scheduleItems);
+                //scheduleItems = new ScheduleItemsMenuFragment();
+                scheduleCalendar = new ScheduleCalendar();
+
+                //swapFragmentHandler(scheduleItems);
+                swapFragmentHandler(scheduleCalendar);
             }
         });
 

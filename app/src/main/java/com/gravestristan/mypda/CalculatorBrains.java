@@ -1,7 +1,5 @@
 package com.gravestristan.mypda;
 
-import android.test.mock.MockPackageManager;
-
 /**
  * Created by Tristan on 4/26/2016.
  */
