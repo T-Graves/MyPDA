@@ -249,6 +249,28 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         return false;
     }
 
+    public void getTasksByDate(String searchByDate){
+        String query = "SELECT * FROM " + TABLE_TASKS  + " WHERE " + TASKS_COLUMN_TASKDATE + " = '" + searchByDate + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        mScheduleItems.clear();
+
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+            while(cursor.getPosition() != cursor.getCount()){
+                ScheduleItems scheduleItem = new ScheduleItems();
+                scheduleItem.setTaskId(UUID.fromString(cursor.getString(1)));
+                scheduleItem.setTaskName(cursor.getString(2));
+                scheduleItem.setTaskDate(cursor.getString(3));
+                scheduleItem.setTaskNote(cursor.getString(4));
+                mScheduleItems.add(scheduleItem);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        db.close();
+    }
+
     //Scheduling function database control ends here
 
     //Notes function database control starts here

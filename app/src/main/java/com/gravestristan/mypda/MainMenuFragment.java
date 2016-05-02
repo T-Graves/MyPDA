@@ -27,11 +27,9 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
     private Button mScheduleButton;
     private Button mNotesButton;
-    private Button mWorkoutsButton;
     private Button mCalculatorsButton;
 
     private CalculatorsMenuFragment calculatorsMenu;
-    private WorkoutsMenuFragment workoutsMenu;
     private NotesMenuFragment notesMenu;
     private ScheduleItemsMenuFragment scheduleItems;
 
@@ -72,9 +70,9 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         topThreeHandler();
 
         mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
-        mScheduleButton.setOnClickListener(new View.OnClickListener(){
+        mScheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 //this button is changed for testing. i'll probably fix the stuff later
 
                 //scheduleItems = new ScheduleItemsMenuFragment();
@@ -92,16 +90,6 @@ public class MainMenuFragment extends Fragment implements AppStatics{
                 notesMenu = new NotesMenuFragment();
 
                 swapFragmentHandler(notesMenu);
-            }
-        });
-
-        mWorkoutsButton = (Button) view.findViewById(R.id.workouts_button);
-        mWorkoutsButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                workoutsMenu = new WorkoutsMenuFragment();
-
-                swapFragmentHandler(workoutsMenu);
             }
         });
 

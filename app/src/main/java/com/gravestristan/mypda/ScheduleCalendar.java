@@ -1,8 +1,9 @@
 package com.gravestristan.mypda;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.text.format.DateFormat;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -20,6 +22,8 @@ import java.util.Locale;
  * Created by student on 4/27/2016.
  */
 public class ScheduleCalendar extends Fragment implements AppStatics {
+
+    private ArrayList<ScheduleItems> mScheduleItems;
 
     public Calendar month;
     public ScheduleCalendarAdapter adapter;
@@ -34,6 +38,7 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mScheduleItems = PDASingleton.get(getActivity()).getScheduleItems();
     }
 
     @Override
@@ -41,7 +46,6 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         View view = inflater.inflate(R.layout.fragment_schedule_calendar, container, false);
 
         month = Calendar.getInstance(Locale.getDefault());
-        //month.set(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
 
         adapter = new ScheduleCalendarAdapter(getContext(), month);
 
@@ -82,14 +86,31 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         mDateItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "day" + adapter.getItem(position));
-                // use adapter.getItem(position) to find the day clicked.
-                // pass the day to a method in the database handler to pull all schedule items
-                // set for that day.
-                // dbHandler fills an arraylist in the singleton that will be displayed by the
-                // schedule main menu fragment that was formerly used.
-                // also gonna need some better definition for the dates and arrows to make it
-                // clear you can click on them and select using them
+                String thisDay = adapter.getItem(position).toString();
+                if (thisDay.length() == 1){
+                    thisDay = "0" + adapter.getItem(position).toString();
+                }
+                String thisMonth = "" + (month.get(Calendar.MONTH) + 1);
+                if (thisMonth.length() == 1){
+                    thisMonth = "0" + (month.get(Calendar.MONTH) + 1);
+                }
+                String thisYear = "" + month.get(Calendar.YEAR);
+                String fullDate = thisYear + "-" + thisMonth + "-" + thisDay;
+
+
+                PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
+                dbHandler.getTasksByDate(fullDate);
+                dbHandler.close();
+
+                if(!mScheduleItems.isEmpty()){
+                    ScheduleItemsMenuFragment scheduleItems = new ScheduleItemsMenuFragment();
+                    swapFragmentHandler(scheduleItems);
+                }else{
+                    Snackbar snackbar = Snackbar
+                            .make(view, "No schedule items for this date", Snackbar.LENGTH_SHORT);
+
+                    snackbar.show();
+                }
             }
         });
 
@@ -111,7 +132,8 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
      */
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        //menu.findItem(R.id.action_new_task).setVisible(true);
+        menu.findItem(R.id.action_new_task).setVisible(true);
+        menu.findItem(R.id.action_all_tasks).setVisible(true);
     }
 
     /**
@@ -125,12 +147,32 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
             case android.R.id.home:
                 getFragmentManager().popBackStack();
                 return true;
-            /*case R.id.action_new_task:
+            case R.id.action_new_task:
                 ScheduleItemsCreationFragment createNewItem = new ScheduleItemsCreationFragment();
                 swapFragmentHandler(createNewItem);
-                return true;*/
+                return true;
+            case R.id.action_all_tasks:
+                mScheduleItems = PDASingleton.get(getContext()).getScheduleItems();
+                mScheduleItems.clear();
+                PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
+                dbHandler.getAllTaskItems();
+                dbHandler.close();
+                ScheduleItemsMenuFragment scheduleItems = new ScheduleItemsMenuFragment();
+                swapFragmentHandler(scheduleItems);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     *
+     * @param newFragment
+     */
+    private void swapFragmentHandler(Fragment newFragment){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

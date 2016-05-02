@@ -5,6 +5,7 @@
     <string name="action_new_task">Create New Task</string>
     <string name="action_new_note">Create New Note</string>
     <string name="action_save_note">Save</string>
+    <string name="action_all_tasks">All Tasks</string>
 
     <string name="action_enable_notify">Enable Notifications</string>
     <string name="action_disable_notify">Disable Notifications</string>

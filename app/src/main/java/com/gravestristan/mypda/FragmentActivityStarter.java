@@ -35,11 +35,6 @@ public abstract class FragmentActivityStarter extends AppCompatActivity implemen
 
         loadSavedPreferences();
 
-        mScheduleItems = PDASingleton.get(getApplicationContext()).getScheduleItems();
-        if(mScheduleItems.isEmpty()){
-            PDADBHandler dbHandler = new PDADBHandler(this, null, null, DATABASE_VERSION);
-            dbHandler.getAllTaskItems();
-        }
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
