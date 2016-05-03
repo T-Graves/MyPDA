@@ -73,9 +73,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         mForwardOneMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(month.get(Calendar.MONTH) == month.getActualMaximum(Calendar.MONTH)) {
+                if (month.get(Calendar.MONTH) == month.getActualMaximum(Calendar.MONTH)) {
                     month.set((month.get(Calendar.YEAR) + 1), month.getActualMinimum(Calendar
-                            .MONTH),1);
+                            .MONTH), 1);
                 } else {
                     month.set(Calendar.MONTH, month.get(Calendar.MONTH) + 1);
                 }
@@ -87,11 +87,11 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String thisDay = adapter.getItem(position).toString();
-                if (thisDay.length() == 1){
+                if (thisDay.length() == 1) {
                     thisDay = "0" + adapter.getItem(position).toString();
                 }
                 String thisMonth = "" + (month.get(Calendar.MONTH) + 1);
-                if (thisMonth.length() == 1){
+                if (thisMonth.length() == 1) {
                     thisMonth = "0" + (month.get(Calendar.MONTH) + 1);
                 }
                 String thisYear = "" + month.get(Calendar.YEAR);
@@ -102,10 +102,10 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
                 dbHandler.getTasksByDate(fullDate);
                 dbHandler.close();
 
-                if(!mScheduleItems.isEmpty()){
+                if (!mScheduleItems.isEmpty()) {
                     ScheduleItemsMenuFragment scheduleItems = new ScheduleItemsMenuFragment();
                     swapFragmentHandler(scheduleItems);
-                }else{
+                } else {
                     Snackbar snackbar = Snackbar
                             .make(view, "No schedule items for this date", Snackbar.LENGTH_SHORT);
 

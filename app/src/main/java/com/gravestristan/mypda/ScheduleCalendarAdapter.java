@@ -11,7 +11,7 @@ import java.util.Calendar;
 /**
  * Created by student on 4/27/2016.
  */
-public class ScheduleCalendarAdapter extends BaseAdapter {
+public class ScheduleCalendarAdapter extends BaseAdapter implements AppStatics{
     private static final int FIRST_WEEK_DAY = 0;
 
     private Context mContext;

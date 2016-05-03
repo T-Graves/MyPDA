@@ -36,6 +36,6 @@
     <item
         android:id="@+id/action_all_tasks"
         android:title="@string/action_all_tasks"
-        nav:showAsAction="ifRoom|collapseActionView"
+        nav:showAsAction="never"
         android:visible="false" />
 </menu>
