@@ -26,12 +26,14 @@
     <item
         android:id="@+id/action_toggle_notifications"
         android:title="@string/action_enable_notify"
-        nav:showAsAction="never" />
+        nav:showAsAction="never"
+        android:visible="false"/>
 
     <item
         android:id="@+id/action_about"
         android:title="@string/action_about"
-        nav:showAsAction="never" />
+        nav:showAsAction="never"
+        android:visible="false"/>
 
     <item
         android:id="@+id/action_all_tasks"

@@ -80,6 +80,10 @@ public class NotesCreationFragment extends Fragment implements AppStatics {
         }
     }
 
+    /**
+     * This method moves the save note code out of the onOptionsItemSelected method to make everything
+     * a little more clean.
+     */
     private void saveNote(){
         NoteObjects noteObject = new NoteObjects();
         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);

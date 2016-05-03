@@ -3,8 +3,8 @@ package com.gravestristan.mypda;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,7 +31,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
     private CalculatorsMenuFragment calculatorsMenu;
     private NotesMenuFragment notesMenu;
-    private ScheduleCalendar scheduleCalendar;
+    private ScheduleCalendarFragment scheduleCalendarFragment;
 
     /**
      * The onCreate method for the main menu fragment. Nothing is done here.
@@ -40,6 +40,7 @@ public class MainMenuFragment extends Fragment implements AppStatics{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     /**
@@ -69,22 +70,22 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
         mScheduleButton.setOnClickListener(new View.OnClickListener() {
             /**
-             *
-             * @param v
+             * The onClick for the Schedule button.
+             * @param v The view being passed in.
              */
             @Override
             public void onClick(View v) {
-                scheduleCalendar = new ScheduleCalendar();
+                scheduleCalendarFragment = new ScheduleCalendarFragment();
 
-                swapFragmentHandler(scheduleCalendar);
+                swapFragmentHandler(scheduleCalendarFragment);
             }
         });
 
         mNotesButton = (Button) view.findViewById(R.id.notes_button);
         mNotesButton.setOnClickListener(new View.OnClickListener(){
             /**
-             *
-             * @param v
+             * The onClick for the Notes button.
+             * @param v The view being passed in.
              */
             @Override
             public void onClick(View v){
@@ -97,8 +98,8 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         mCalculatorsButton = (Button) view.findViewById(R.id.calculators_button);
         mCalculatorsButton.setOnClickListener(new View.OnClickListener() {
             /**
-             *
-             * @param v
+             * The onClick for the calculators button.
+             * @param v The view being passed in.
              */
             @Override
             public void onClick(View v) {
@@ -184,5 +185,16 @@ public class MainMenuFragment extends Fragment implements AppStatics{
         transaction.replace(R.id.fragmentContainer, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    /**
+     * onPrepareOptionsMenu for the main menu fragment.
+     * It sets the about app item and toggle notifications item visible.
+     * @param menu
+     */
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_about).setVisible(true);
+        menu.findItem(R.id.action_toggle_notifications).setVisible(true);
     }
 }

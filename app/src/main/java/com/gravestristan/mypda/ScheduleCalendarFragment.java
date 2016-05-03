@@ -19,10 +19,12 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- *
+ * The ScheduleCalendarFragment. It creates a calendar that the user can use to access all created
+ * Schedule items. The user can access the create Schedule items menu from here as well as see all
+ * Schedule items at the same time.
  * Created by student on 4/27/2016.
  */
-public class ScheduleCalendar extends Fragment implements AppStatics {
+public class ScheduleCalendarFragment extends Fragment implements AppStatics {
 
     private ArrayList<ScheduleItems> mScheduleItems;
 
@@ -35,8 +37,8 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     private TextView mForwardOneMonth;
 
     /**
-     *
-     * @param savedInstanceState
+     * The onCreate method for the ScheduleCalendarFragment fragment.
+     * @param savedInstanceState The savedInstanceState being passed in.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,10 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     }
 
     /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * The onCreateView method of the ScheduleCalendarFragment fragment. It sets up all the view contents.
+     * @param inflater The LayoutInflater being passed in.
+     * @param container The ViewGroup being passed in.
+     * @param savedInstanceState The savedInstanceState being passed in.
      * @return
      */
     @Override
@@ -69,8 +71,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         mBackOneMonth = (TextView) view.findViewById(R.id.back_one_month);
         mBackOneMonth.setOnClickListener(new View.OnClickListener() {
             /**
-             *
-             * @param v
+             * Sets the month backwards by one each time it is clicked. If the current month being shown
+             * is January, it sets the year backwards by one and shows December.
+             * @param v The view being passed in.
              */
             @Override
             public void onClick(View v) {
@@ -87,8 +90,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         mForwardOneMonth = (TextView) view.findViewById(R.id.forward_one_month);
         mForwardOneMonth.setOnClickListener(new View.OnClickListener() {
             /**
-             *
-             * @param v
+             * Sets the month forward by one each time it is clicked. If the current month being shown
+             * is December, it sets the year forward by 1 and shows January.
+             * @param v The view being passed in.
              */
             @Override
             public void onClick(View v) {
@@ -104,11 +108,15 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
 
         mDateItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
-             *
-             * @param parent
-             * @param view
-             * @param position
-             * @param id
+             * The onItemClick method for each date item.
+             * It creates a full date string (yyyy-MM-dd) and sends it to the dbHandler.
+             * It then sends the user to a fragment containing a recycler view that shows
+             * all schedule items for that date. If the date clicked has no items the user is informed
+             * using a SnackBar message.
+             * @param parent The AdapterView<> parent being passed in.
+             * @param view The View being passed in.
+             * @param position The clicked item's position.
+             * @param id The clicked item's id.
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -144,7 +152,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     }
 
     /**
-     *
+     * refreshCalendar method.
+     * This method is called whenever the calendar adapter needs to be refreshed.
+     * Called on the backOneMonth and forwardOneMonth buttons.
      */
     public void refreshCalendar()
     {
@@ -156,8 +166,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     }
 
     /**
-     *
-     * @param menu
+     * The onPrepareOptionsMenu for the ScheduleCalendarFragment fragment.
+     * It sets action_new_task and action_all_tasks to visible.
+     * @param menu The menu being passed in.
      */
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
@@ -166,8 +177,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     }
 
     /**
-     *
-     * @param item
+     * The onOptionsItemSelected method for ScheduleCalendarFragment. It defines what happens when
+     * a menu item is clicked.
+     * @param item The menu item being passed in.
      * @return
      */
     @Override
@@ -195,8 +207,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     }
 
     /**
-     *
-     * @param newFragment
+     * This method is used to reduce redundant code. It takes in a new fragment and swaps it out
+     * with the current fragment. it puts the current fragment on the backstack to be returned later.
+     * @param newFragment The fragment to change to.
      */
     private void swapFragmentHandler(Fragment newFragment){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

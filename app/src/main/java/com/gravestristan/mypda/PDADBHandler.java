@@ -170,10 +170,10 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
      * This method finds all tasks ordered by date. It then grabs the top three items and stores
      * them as ScheduleItems objects and puts those into an ArrayList. the array list is then
      * returned.
-     * @return
+     * @return An ArrayList containing the closest three task items to return.
      */
     public ArrayList getThreeClosestTaskItems(){
-        ArrayList<ScheduleItems> returnArray = new ArrayList<ScheduleItems>();
+        ArrayList<ScheduleItems> returnArray = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_TASKS + " ORDER BY date(" + TASKS_COLUMN_TASKDATE + ") ASC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -198,8 +198,6 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
                             scheduleItem.setTaskNote(cursor.getString(4));
                             returnArray.add(scheduleItem);
                             numberOfItemsGrabbed++;
-                        }else{
-                            //TODO have the database delete the old entry here maybe only after a specific amount of time after due date
                         }
                     }
 
@@ -216,8 +214,9 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
-     * @return
+     * This method is used to check for any upcoming tasks. If it finds even a single task for the
+     * searched date it will return true, otherwise it will return false.
+     * @return true if an item is found, false if no items are found.
      */
     public boolean checkForUpcomingTasks(){
         String query = "SELECT * FROM " + TABLE_TASKS;
@@ -250,8 +249,9 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
-     * @param searchByDate
+     * This method is used to get tasks by date. It will find all tasks that have a date = to the
+     * date being passed in.
+     * @param searchByDate The date to search by.
      */
     public void getTasksByDate(String searchByDate){
         String query = "SELECT * FROM " + TABLE_TASKS  + " WHERE " + TASKS_COLUMN_TASKDATE + " = '" + searchByDate + "';";
@@ -280,8 +280,8 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     //Notes function database control starts here
 
     /**
-     *
-     * @param noteObject
+     * This method deletes a note from the database based on an object being passed in.
+     * @param noteObject The note being deleted.
      */
     public void deleteNoteFromNoteTable(NoteObjects noteObject){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -289,9 +289,9 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
-     * @param currentUUID
-     * @return
+     * This method gets a note based on a UUID being passed in.
+     * @param currentUUID The current UUID of the note that should be returned.
+     * @return The note that was found based on the UUID
      */
     public NoteObjects getNote(UUID currentUUID){
         NoteObjects noteObject = new NoteObjects();
@@ -314,8 +314,8 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
-     * @param noteObject
+     * This method adds a new note into the database based on an object being passed in.
+     * @param noteObject The note that is being added to the database.
      */
     public void addNote(NoteObjects noteObject){
         ContentValues values = new ContentValues();
@@ -330,8 +330,9 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
-     * @param noteObject
+     * This method is used to update a note already in the database. The update is based on a note
+     * being passed in.
+     * @param noteObject The note that is being updated.
      */
     public void updateNote(NoteObjects noteObject){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -347,10 +348,10 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
     }
 
     /**
-     *
+     * This method is used to get all note items. It returns an ArrayList of all notes in the database
      */
     public ArrayList<NoteObjects> getAllNoteItems(){
-        ArrayList<NoteObjects> mNoteObjects = new ArrayList<NoteObjects>();
+        ArrayList<NoteObjects> mNoteObjects = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NOTES;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
