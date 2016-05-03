@@ -11,17 +11,14 @@ import android.content.res.Resources;
 import android.support.v4.app.NotificationCompat;
 
 /**
+ *
  * Created by Tristan on 4/12/2016.
  */
 public class ScheduleNotificationService extends IntentService implements AppStatics{
 
     private static final String TAG = "NotificationService";
 
-    // Checks for upcoming notifications every 5 hours.
     private static final int NOTIFICATION_INTERVAL = 1000000 * 18;
-
-    //test timing every 5 seconds.
-    //private static final int NOTIFICATION_INTERVAL = 1000 * 5;
 
     /**
      *
@@ -44,7 +41,7 @@ public class ScheduleNotificationService extends IntentService implements AppSta
 
             Notification notification = new NotificationCompat.Builder(this)
                     .setTicker(r.getString(R.string.upcoming_schedule_items))
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_stat_name)
                     .setContentTitle(r.getString(R.string.upcoming_schedule_items_title))
                     .setContentText(r.getString(R.string.upcoming_schedule_items_text))
                     .setContentIntent(pi)

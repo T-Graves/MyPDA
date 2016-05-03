@@ -35,11 +35,22 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
     private double billPerPerson = 0.0;
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_tip_calculator, container, false);
@@ -57,6 +68,10 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
 
         mCalculateTipButton = (Button) view.findViewById(R.id.calculate_button);
         mCalculateTipButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 getNumbersToCalculate();
@@ -66,6 +81,9 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
         return view;
     }
 
+    /**
+     *
+     */
     private void getNumbersToCalculate(){
         if(mBillAmount.getText() != null && !mBillAmount.getText().toString().equals("")){
             billAmount = Double.parseDouble(mBillAmount.getText().toString());
@@ -81,6 +99,9 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
         }
     }
 
+    /**
+     *
+     */
     private void findTipAmount() {
         if(mCustomTip.getText() != null && !mCustomTip.getText().toString().equals("")){
             tipAmount = Integer.parseInt(mCustomTip.getText().toString());
@@ -98,6 +119,9 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
         }
     }
 
+    /**
+     *
+     */
     private void calculateBill(){
         tipPerPersonOutput = (double) Math.round(((billAmount * tipAmount) / numberOfPeople) * 100) / 100;
         billPerPerson = (double) Math.round((billAmount / numberOfPeople) * 100) / 100;

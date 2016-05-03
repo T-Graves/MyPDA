@@ -63,6 +63,11 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
 
         ((ScheduleRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
                         ScheduleRecyclerViewAdapter.ScheduleClickListener() {
+                            /**
+                             *
+                             * @param position
+                             * @param v
+                             */
                             @Override
                             public void onItemClick(int position, View v) {
                                 SingleScheduleItemFragment currentItem = new SingleScheduleItemFragment();
@@ -77,6 +82,11 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
 
         ((ScheduleRecyclerViewAdapter) mAdapter).setOnItemLongClickListener(new
                         ScheduleRecyclerViewAdapter.ScheduleLongClickListener(){
+                            /**
+                             *
+                             * @param position
+                             * @param v
+                             */
                             @Override
                             public void onItemLongClick(int position, View v){
                                 final int itemPosition = position;
@@ -86,6 +96,11 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                                 builder.setTitle("Delete Item");
                                 builder.setMessage("Delete This Schedule Item?");
                                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    /**
+                                     *
+                                     * @param dialog
+                                     * @param which
+                                     */
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
@@ -97,6 +112,11 @@ public class ScheduleItemsMenuFragment extends Fragment implements AppStatics{
                                     }
                                 });
                                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    /**
+                                     *
+                                     * @param dialog
+                                     * @param which
+                                     */
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();

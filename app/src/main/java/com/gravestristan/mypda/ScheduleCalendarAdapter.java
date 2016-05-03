@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 /**
+ *
  * Created by student on 4/27/2016.
  */
 public class ScheduleCalendarAdapter extends BaseAdapter implements AppStatics{
@@ -17,30 +18,54 @@ public class ScheduleCalendarAdapter extends BaseAdapter implements AppStatics{
     private Context mContext;
 
     private Calendar month;
-    private Calendar selectedDate;
 
     public String[] days;
 
+    /**
+     *
+     * @param c
+     * @param monthCalendar
+     */
     public ScheduleCalendarAdapter(Context c, Calendar monthCalendar) {
         month = monthCalendar;
-        selectedDate = (Calendar)monthCalendar.clone();
         mContext = c;
         month.set(Calendar.DAY_OF_MONTH, 1);
         refreshDays();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCount() {
         return days.length;
     }
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     public long getItemId(int position) {
         return 0;
     }
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     public Object getItem(int position) {
         return days[position];
     }
 
+    /**
+     *
+     * @param position
+     * @param v
+     * @param parent
+     * @return
+     */
     public View getView(int position, View v, ViewGroup parent) {
         View view = v;
         TextView dayView;
@@ -72,6 +97,9 @@ public class ScheduleCalendarAdapter extends BaseAdapter implements AppStatics{
         return view;
     }
 
+    /**
+     *
+     */
     public void refreshDays() {
         int lastDay = month.getActualMaximum(Calendar.DAY_OF_MONTH);
         int firstDay = (int) month.get(Calendar.DAY_OF_WEEK);

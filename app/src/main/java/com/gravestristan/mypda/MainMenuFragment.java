@@ -31,9 +31,6 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
     private CalculatorsMenuFragment calculatorsMenu;
     private NotesMenuFragment notesMenu;
-    private ScheduleItemsMenuFragment scheduleItems;
-
-    // this will probably stay but its being used for testing right now
     private ScheduleCalendar scheduleCalendar;
 
     /**
@@ -71,20 +68,24 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
         mScheduleButton = (Button) view.findViewById(R.id.schedule_button);
         mScheduleButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
-                //this button is changed for testing. i'll probably fix the stuff later
-
-                //scheduleItems = new ScheduleItemsMenuFragment();
                 scheduleCalendar = new ScheduleCalendar();
 
-                //swapFragmentHandler(scheduleItems);
                 swapFragmentHandler(scheduleCalendar);
             }
         });
 
         mNotesButton = (Button) view.findViewById(R.id.notes_button);
         mNotesButton.setOnClickListener(new View.OnClickListener(){
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v){
                 notesMenu = new NotesMenuFragment();
@@ -95,6 +96,10 @@ public class MainMenuFragment extends Fragment implements AppStatics{
 
         mCalculatorsButton = (Button) view.findViewById(R.id.calculators_button);
         mCalculatorsButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 calculatorsMenu = new CalculatorsMenuFragment();

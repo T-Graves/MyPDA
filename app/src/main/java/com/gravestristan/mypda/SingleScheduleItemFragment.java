@@ -23,16 +23,16 @@ import java.util.UUID;
  */
 public class SingleScheduleItemFragment extends Fragment implements AppStatics {
 
-    ArrayList<ScheduleItems> mScheduleItems;
+    private ArrayList<ScheduleItems> mScheduleItems;
 
-    EditText mTaskName;
-    EditText mTaskDate;
-    EditText mTaskNote;
+    private EditText mTaskName;
+    private EditText mTaskDate;
+    private EditText mTaskNote;
 
-    Button mUpdateButton;
+    private Button mUpdateButton;
 
-    Calendar myCalendar = Calendar.getInstance();
-    DatePickerDialog.OnDateSetListener date;
+    private Calendar myCalendar = Calendar.getInstance();
+    private DatePickerDialog.OnDateSetListener date;
 
     private UUID mCurrentUUID;
     private int position;
@@ -75,6 +75,10 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
 
         mTaskDate.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             *
+             * @param v
+             */
             public void onClick(View v) {
                 new DatePickerDialog(getContext(), date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -84,6 +88,13 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
 
         date = new DatePickerDialog.OnDateSetListener() {
 
+            /**
+             *
+             * @param view
+             * @param year
+             * @param monthOfYear
+             * @param dayOfMonth
+             */
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
@@ -96,6 +107,10 @@ public class SingleScheduleItemFragment extends Fragment implements AppStatics {
         };
 
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 ScheduleItems newItem = new ScheduleItems();

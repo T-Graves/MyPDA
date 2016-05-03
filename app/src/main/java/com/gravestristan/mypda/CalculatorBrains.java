@@ -19,24 +19,44 @@ public class CalculatorBrains implements AppStatics {
     public static final String CLEAR = "CLEAR";
 
 
+    /**
+     *
+     */
     public CalculatorBrains() {
         mOperand = 0;
         mWaitingOperand = 0;
         mWaitingOperator = "";
     }
 
+    /**
+     *
+     * @param operand
+     */
     public void setOperand(double operand) {
         mOperand = operand;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getResult() {
         return mOperand;
     }
 
+    /**
+     *
+     * @return
+     */
     public String toString(){
         return Double.toString(mOperand);
     }
 
+    /**
+     *
+     * @param operator
+     * @return
+     */
     protected double performOperation(String operator){
         if (operator.equals(CLEAR)) {
             mOperand = 0;
@@ -57,6 +77,9 @@ public class CalculatorBrains implements AppStatics {
         return mOperand;
     }
 
+    /**
+     *
+     */
     protected void performWaitingOperation() {
         if (mWaitingOperator.equals(ADD)) {
             mOperand = mWaitingOperand + mOperand;

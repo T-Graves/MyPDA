@@ -18,8 +18,6 @@ import java.util.ArrayList;
  */
 public abstract class FragmentActivityStarter extends AppCompatActivity implements AppStatics{
 
-    ArrayList<ScheduleItems> mScheduleItems;
-
     protected abstract Fragment createFragment();
 
     /**

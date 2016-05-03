@@ -67,6 +67,11 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
 
         ((NotesRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
                              NotesRecyclerViewAdapter.NoteClickListener() {
+                                 /**
+                                  *
+                                  * @param position
+                                  * @param v
+                                  */
                                  @Override
                                  public void onItemClick(int position, View v) {
                                      SingleNoteFragment currentNote = new SingleNoteFragment();
@@ -79,6 +84,11 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
                              });
 
         ((NotesRecyclerViewAdapter) mAdapter).setOnItemLongClickListener(new NotesRecyclerViewAdapter.NoteLongClickListener() {
+            /**
+             *
+             * @param position
+             * @param v
+             */
             @Override
             public void onItemLongClick(int position, View v) {
                 final int itemPosition = position;
@@ -88,6 +98,11 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
                 builder.setTitle("Delete Note");
                 builder.setMessage("Delete This Note?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    /**
+                     *
+                     * @param dialog
+                     * @param which
+                     */
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         PDADBHandler dbHandler = new PDADBHandler(getContext(), null, null, DATABASE_VERSION);
@@ -99,6 +114,11 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    /**
+                     *
+                     * @param dialog
+                     * @param which
+                     */
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

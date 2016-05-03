@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class SingleNoteFragment extends Fragment implements AppStatics{
 
-    EditText mNoteContent;
+    private EditText mNoteContent;
 
     private UUID mCurrentUUID;
 

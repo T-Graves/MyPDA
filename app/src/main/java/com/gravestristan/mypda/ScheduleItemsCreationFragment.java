@@ -47,7 +47,6 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-
         mScheduleItems = PDASingleton.get(getActivity()).getScheduleItems();
     }
 
@@ -70,6 +69,10 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
         mTaskDate.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             *
+             * @param v
+             */
             public void onClick(View v) {
                 new DatePickerDialog(getContext(), date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -79,6 +82,13 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
         date = new DatePickerDialog.OnDateSetListener() {
 
+            /**
+             *
+             * @param view
+             * @param year
+             * @param monthOfYear
+             * @param dayOfMonth
+             */
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
@@ -90,8 +100,11 @@ public class ScheduleItemsCreationFragment extends Fragment implements AppStatic
 
         };
 
-        // keep near bottom as it should be the last thing to happen. easier to follow this way
         mCreateButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 if(mTaskDate.getText().toString().equals("")){

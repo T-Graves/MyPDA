@@ -44,9 +44,13 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics, Vie
     private CalculatorBrains mCalcBrains;
     private static final String DIGITS = "0123456789.";
 
-    DecimalFormat df = new DecimalFormat("@############");
+    private DecimalFormat df = new DecimalFormat("@############");
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -57,6 +61,13 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics, Vie
         df.setMaximumIntegerDigits(8);
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_basic_calculator, container, false);
@@ -111,6 +122,10 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics, Vie
         return view;
     }
 
+    /**
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v){
         String buttonPressed = ((Button) v).getText().toString();

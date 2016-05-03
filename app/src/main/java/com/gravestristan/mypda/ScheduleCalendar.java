@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
+ *
  * Created by student on 4/27/2016.
  */
 public class ScheduleCalendar extends Fragment implements AppStatics {
@@ -33,7 +34,10 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
     private TextView mBackOneMonth;
     private TextView mForwardOneMonth;
 
-
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,13 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         mScheduleItems = PDASingleton.get(getActivity()).getScheduleItems();
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_calendar, container, false);
@@ -57,6 +68,10 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
 
         mBackOneMonth = (TextView) view.findViewById(R.id.back_one_month);
         mBackOneMonth.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 if(month.get(Calendar.MONTH) == month.getActualMinimum(Calendar.MONTH)) {
@@ -71,6 +86,10 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
 
         mForwardOneMonth = (TextView) view.findViewById(R.id.forward_one_month);
         mForwardOneMonth.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 if (month.get(Calendar.MONTH) == month.getActualMaximum(Calendar.MONTH)) {
@@ -84,6 +103,13 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         });
 
         mDateItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             *
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String thisDay = adapter.getItem(position).toString();
@@ -117,6 +143,9 @@ public class ScheduleCalendar extends Fragment implements AppStatics {
         return view;
     }
 
+    /**
+     *
+     */
     public void refreshCalendar()
     {
 

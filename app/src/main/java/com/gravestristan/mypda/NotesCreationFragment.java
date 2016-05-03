@@ -18,7 +18,7 @@ import android.widget.EditText;
  */
 public class NotesCreationFragment extends Fragment implements AppStatics {
 
-    EditText mNoteContent;
+    private EditText mNoteContent;
 
     /**
      * The onCreate method for NotesCreationFragment. It makes sure this fragment has the options

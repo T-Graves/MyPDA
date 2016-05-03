@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
 
-    ArrayList<ScheduleItems> mScheduleItems;
+    private ArrayList<ScheduleItems> mScheduleItems;
 
     // Database name and table names
     private static final String DATABASE_NAME = "pdaDB.db";
@@ -166,29 +166,6 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         db.close();
     }
 
-    public ArrayList<ScheduleItems> getAllTaskItemsReturned(){
-        ArrayList<ScheduleItems> returnScheduleItems = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_TASKS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        if(cursor.moveToFirst()){
-            cursor.moveToFirst();
-            while(cursor.getPosition() != cursor.getCount()){
-                ScheduleItems scheduleItem = new ScheduleItems();
-                scheduleItem.setTaskId(UUID.fromString(cursor.getString(1)));
-                scheduleItem.setTaskName(cursor.getString(2));
-                scheduleItem.setTaskDate(cursor.getString(3));
-                scheduleItem.setTaskNote(cursor.getString(4));
-                returnScheduleItems.add(scheduleItem);
-                cursor.moveToNext();
-            }
-            cursor.close();
-        }
-        db.close();
-        return returnScheduleItems;
-    }
-
     /**
      * This method finds all tasks ordered by date. It then grabs the top three items and stores
      * them as ScheduleItems objects and puts those into an ArrayList. the array list is then
@@ -272,6 +249,10 @@ public class PDADBHandler extends SQLiteOpenHelper implements AppStatics{
         return false;
     }
 
+    /**
+     *
+     * @param searchByDate
+     */
     public void getTasksByDate(String searchByDate){
         String query = "SELECT * FROM " + TABLE_TASKS  + " WHERE " + TASKS_COLUMN_TASKDATE + " = '" + searchByDate + "';";
         SQLiteDatabase db = this.getWritableDatabase();

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by Tristan on 3/1/2016.
  */
 public class CalculatorsMenuFragment extends Fragment implements AppStatics {
@@ -26,10 +27,6 @@ public class CalculatorsMenuFragment extends Fragment implements AppStatics {
     private ViewPager mViewPager;
     private ViewPagerAdapter adapter;
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     /**
      *
@@ -66,29 +63,55 @@ public class CalculatorsMenuFragment extends Fragment implements AppStatics {
         return view;
     }
 
+    /**
+     *
+     */
     class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
+        /**
+         *
+         * @param manager
+         */
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
 
+        /**
+         *
+         * @param position
+         * @return
+         */
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
 
+        /**
+         *
+         * @return
+         */
         @Override
         public int getCount() {
             return mFragmentList.size();
         }
 
+        /**
+         *
+         * @param fragment
+         * @param title
+         */
         public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
 
+        /**
+         *
+         * @param position
+         * @return
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);

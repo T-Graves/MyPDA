@@ -22,8 +22,8 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
      *
      */
     public static class ScheduleItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView taskName;
-        TextView taskDate;
+        private TextView taskName;
+        private TextView taskDate;
 
         /**
          *
