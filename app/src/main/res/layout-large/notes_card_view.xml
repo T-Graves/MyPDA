@@ -9,7 +9,7 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         card_view:cardCornerRadius="4dp"
         card_view:cardBackgroundColor="@color/cardview_dark_background"
         android:elevation="10dp">
@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Note content"
+                android:textSize="20sp"
                 android:id="@+id/note_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"

@@ -6,13 +6,15 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:text="Task Name"
+            android:textSize="18sp"
+            android:gravity="center_vertical|center_horizontal"
             android:id="@+id/task_name_label" />
 
         <EditText
@@ -26,13 +28,15 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:text="Task Date"
+            android:textSize="18sp"
+            android:gravity="center_vertical|center_horizontal"
             android:id="@+id/task_date_label" />
 
         <EditText
@@ -49,13 +53,15 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:text="Task Note"
+            android:textSize="18sp"
+            android:gravity="center_vertical|center_horizontal"
             android:id="@+id/task_note_label" />
 
         <EditText

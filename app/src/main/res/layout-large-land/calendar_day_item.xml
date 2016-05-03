@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="100dp"
               android:background="#989898"
-              android:padding="4dp">
+              android:padding="8dp">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="75dp"
         android:id="@+id/date"
+        android:textSize="20sp"
         android:textColor="#000000"
         android:background="#aaaaaa"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>
