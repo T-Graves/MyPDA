@@ -68,9 +68,9 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
         ((NotesRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
                              NotesRecyclerViewAdapter.NoteClickListener() {
                                  /**
-                                  *
-                                  * @param position
-                                  * @param v
+                                  * The onItemClick method for the NotesRecyclerViewAdapter.
+                                  * @param position The position of the item clicked.
+                                  * @param v The view being passed in.
                                   */
                                  @Override
                                  public void onItemClick(int position, View v) {
@@ -85,9 +85,9 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
 
         ((NotesRecyclerViewAdapter) mAdapter).setOnItemLongClickListener(new NotesRecyclerViewAdapter.NoteLongClickListener() {
             /**
-             *
-             * @param position
-             * @param v
+             * The onItemLongClick method for the NotesRecyclerViewAdapter.
+             * @param position The position of the item clicked.
+             * @param v The view being passed in.
              */
             @Override
             public void onItemLongClick(int position, View v) {
@@ -99,8 +99,8 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
                 builder.setMessage("Delete This Note?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     /**
-                     *
-                     * @param dialog
+                     * The onClick method for the yes option of the alert dialog.
+                     * @param dialog The dialog interface being passed in.
                      * @param which
                      */
                     @Override
@@ -115,8 +115,8 @@ public class NotesMenuFragment extends Fragment implements AppStatics{
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     /**
-                     *
-                     * @param dialog
+                     * The onClick method for the no option of the alert dialog.
+                     * @param dialog The dialog interface being passed in.
                      * @param which
                      */
                     @Override

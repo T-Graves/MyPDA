@@ -23,7 +23,7 @@ public class PDASingleton {
      */
     private PDASingleton(Context appContext) {
         mAppContext = appContext;
-        mScheduleItems = new ArrayList<ScheduleItems>();
+        mScheduleItems = new ArrayList<>();
     }
 
     /**
@@ -44,19 +44,5 @@ public class PDASingleton {
      */
     public ArrayList<ScheduleItems> getScheduleItems(){
         return mScheduleItems;
-    }
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public ScheduleItems getScheduleItem(UUID id) {
-        for (ScheduleItems scheduleItem : mScheduleItems) {
-            if(scheduleItem.getTaskId().equals(id)){
-                return scheduleItem;
-            }
-        }
-        return null;
     }
 }

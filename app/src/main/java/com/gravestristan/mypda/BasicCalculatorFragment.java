@@ -11,6 +11,8 @@ import android.widget.EditText;
 import java.text.DecimalFormat;
 
 /**
+ * This is the basic calculator fragment. It handles the connections and click listeners for all buttons.
+ * The calculation is passed on to the CalculatorBrains class.
  * Created by Tristan on 4/19/2016.
  */
 public class BasicCalculatorFragment extends Fragment implements AppStatics, View.OnClickListener {
@@ -48,8 +50,9 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics, Vie
 
 
     /**
-     *
-     * @param savedInstanceState
+     * The onCreate method for the basic calculator fragment. It initializes the CalculatorBrains instance
+     * and sets some parts of the DecimalFormat df that is used.
+     * @param savedInstanceState The bundle being passed in.
      */
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -62,11 +65,12 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics, Vie
     }
 
     /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * The onCreateView method for the basic calculator fragment. all the buttons and output field
+     * are connected here and the onClick listener is set to all the buttons here.
+     * @param inflater The layout inflater being passed in.
+     * @param container The view group being passed in.
+     * @param savedInstanceState The bundle being passed in.
+     * @return The view that is created in the method.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -123,8 +127,9 @@ public class BasicCalculatorFragment extends Fragment implements AppStatics, Vie
     }
 
     /**
-     *
-     * @param v
+     * The onClick listener for all buttons. It handles what should happen depending on what button
+     * is pressed in the view.
+     * @param v The view being passed in.
      */
     @Override
     public void onClick(View v){

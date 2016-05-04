@@ -1,6 +1,7 @@
 package com.gravestristan.mypda;
 
 /**
+ * This is the brains of the basic calculator. The calculations are done here.
  * Created by Tristan on 4/26/2016.
  */
 public class CalculatorBrains implements AppStatics {
@@ -20,7 +21,7 @@ public class CalculatorBrains implements AppStatics {
 
 
     /**
-     *
+     * The basic constructor for the class. It initializes the operator and operand containsers.
      */
     public CalculatorBrains() {
         mOperand = 0;
@@ -29,33 +30,35 @@ public class CalculatorBrains implements AppStatics {
     }
 
     /**
-     *
-     * @param operand
+     * This method is used to set mOperand.
+     * @param operand The operand to be used.
      */
     public void setOperand(double operand) {
         mOperand = operand;
     }
 
     /**
-     *
-     * @return
+     * The result to be passed back.
+     * @return The calculated number.
      */
     public double getResult() {
         return mOperand;
     }
 
     /**
-     *
-     * @return
+     * A toString method to turn a double into a string.
+     * @return The double that has been turned into a string.
      */
     public String toString(){
         return Double.toString(mOperand);
     }
 
     /**
-     *
-     * @param operator
-     * @return
+     * This method is used to handle the clear, invert, and toggle sign buttons if they are pressed.
+     * otherwise it calls the performWaitingOperation method to do the regular operations like
+     * +, -, *, or /
+     * @param operator The operator that has been pressed.
+     * @return The calculated double.
      */
     protected double performOperation(String operator){
         if (operator.equals(CLEAR)) {
@@ -78,7 +81,7 @@ public class CalculatorBrains implements AppStatics {
     }
 
     /**
-     *
+     * This method does the regular calculations.
      */
     protected void performWaitingOperation() {
         if (mWaitingOperator.equals(ADD)) {
