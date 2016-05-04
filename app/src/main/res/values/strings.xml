@@ -18,4 +18,34 @@
     <string name="notes_button">Notes</string>
     <string name="workouts_button">Workouts</string>
     <string name="calculators_button">Calculators</string>
+
+    <string name="main_menu_help_text">
+        Use the buttons on the Main menu to navigate to the other parts of the app.
+        You can also toggle schedule notifications on and off from the menu bar.
+    </string>
+
+    <string name="schedule_help_text">
+        The Schedule menu is navigated using the calendar.
+        You can create a new schedule item by clicking on the plus button on the menu bar.
+        Clicking on a date will take you to a listing of all schedule items for that date.
+        If there are no schedule items, the app will simply inform you of that.
+        You can update your schedule items by clicking on an item in the list.
+        You can delete a schedule item by clicking and holding the item.
+        A window will pop up asking you if you really want to delete the item.
+        If you want to see all schedule items at the same time, you can access that list from the menu.
+    </string>
+
+    <string name="note_help_text">
+        Creating, updating, and deleting notes works the same way as creating, updating, and
+        deleting schedule items. New notes will automatically save when you click the back button
+        if any text has been entered. You can also save notes using the save button on the menu bar.
+    </string>
+
+    <string name="calculator_help_text">
+        The calculators are very simple to use. The basic calculator works just like any other basic
+        calculator. The tip calculator requires all input fields to be filled. For the tip percentage,
+        you can choose to use one of the three standard tip amounts, or you can enter your own tip
+        in the custom tip field. If you have a number in the custom tip field, the calculator will
+        automatically use that number over the other three options.
+    </string>
 </resources>

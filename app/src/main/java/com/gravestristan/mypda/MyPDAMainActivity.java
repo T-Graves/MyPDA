@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -67,7 +68,11 @@ public class MyPDAMainActivity extends FragmentActivityStarter implements AppSta
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_about:
-                Toast.makeText(this, "About page coming later", Toast.LENGTH_SHORT).show();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                AboutAndHelpFragment aboutAndHelpFragment = new AboutAndHelpFragment();
+                transaction.replace(R.id.fragmentContainer, aboutAndHelpFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 return true;
             case R.id.action_toggle_notifications:
                 Boolean shouldStartAlarm = !ScheduleNotificationService.isServiceAlarmOn(this);
