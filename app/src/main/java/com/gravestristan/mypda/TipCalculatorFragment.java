@@ -27,6 +27,7 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
     private TextView mBillPerPerson;
 
     private Button mCalculateTipButton;
+    private Button mClearFields;
 
     private double billAmount = 0.0;
     private int numberOfPeople = 0;
@@ -36,8 +37,8 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
 
 
     /**
-     *
-     * @param savedInstanceState
+     * The onCreate method for the TipCalculatorFragment. It doesn't do anything right now.
+     * @param savedInstanceState The bundle being passed in.
      */
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -45,11 +46,12 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
     }
 
     /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * The onCreateView method for the TipCalculatorFragment. It connects all the fields of the tip
+     * form and sets onClick listeners for the two buttons.
+     * @param inflater The layout inflater being passed in.
+     * @param container The view group being passed in.
+     * @param savedInstanceState The bundle being passed in.
+     * @return The view that is created.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -69,8 +71,8 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
         mCalculateTipButton = (Button) view.findViewById(R.id.calculate_button);
         mCalculateTipButton.setOnClickListener(new View.OnClickListener() {
             /**
-             *
-             * @param v
+             * The onClick method for the mCalculateTipButton. It calls the getNumbersToCalculate method.
+             * @param v The view being passed in.
              */
             @Override
             public void onClick(View v) {
@@ -78,11 +80,50 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
             }
         });
 
+        mClearFields = (Button) view.findViewById(R.id.clear_button);
+        mClearFields.setOnClickListener(new View.OnClickListener() {
+            /**
+             * The onClick method for the mClearFields button. It clears all fields in the form.
+             * @param v The view being passed in.
+             */
+            @Override
+            public void onClick(View v) {
+                // Clear variables
+                billAmount = 0.0;
+                numberOfPeople = 0;
+                tipAmount = 0.0;
+                tipPerPersonOutput = 0.0;
+                billPerPerson = 0.0;
+
+                // Clear EditTexts
+                mBillAmount.setText(null);
+                mNumberOfPeople.setText(null);
+                mCustomTip.setText(null);
+
+                // Reset radio buttons
+                if(mFivePercent.isChecked()){
+                    mFivePercent.setChecked(false);
+                }
+                if(mTenPercent.isChecked()){
+                    mTenPercent.setChecked(false);
+                }
+                if(mFifteenPercent.isChecked()){
+                    mFifteenPercent.setChecked(false);
+                }
+
+                // Clear output fields
+                mTipPerPerson.setText("");
+                mBillPerPerson.setText("");
+
+            }
+        });
+
         return view;
     }
 
     /**
-     *
+     * This method grabs the user inputs from the form and calls the calculateBill method if all
+     * user input is present.
      */
     private void getNumbersToCalculate(){
         if(mBillAmount.getText() != null && !mBillAmount.getText().toString().equals("")){
@@ -100,7 +141,8 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
     }
 
     /**
-     *
+     * The findTipAmount method. It figures out what the tip amount should be based on which radio
+     * button is pressed, or if there is anything in the custom tip field.
      */
     private void findTipAmount() {
         if(mCustomTip.getText() != null && !mCustomTip.getText().toString().equals("")){
@@ -120,7 +162,7 @@ public class TipCalculatorFragment extends Fragment implements AppStatics {
     }
 
     /**
-     *
+     * This method calculates and output the tip per person and bill per person.
      */
     private void calculateBill(){
         tipPerPersonOutput = (double) Math.round(((billAmount * tipAmount) / numberOfPeople) * 100) / 100;

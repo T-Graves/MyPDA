@@ -202,11 +202,21 @@
             android:text="Calculate"
             android:id="@+id/calculate_button"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/linearLayout2"
+            android:layout_alignBottom="@+id/linearLayout2"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="75dp"
-            android:layout_marginEnd="75dp" />
+            android:layout_marginRight="89dp"
+            android:layout_marginEnd="89dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:id="@+id/clear_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/calculate_button"
+            android:layout_alignLeft="@+id/calculate_button"
+            android:layout_alignStart="@+id/calculate_button" />
 
     </RelativeLayout>
 
